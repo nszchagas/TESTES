@@ -5,22 +5,22 @@ repo_url: https://github.com/nszchagas/TESTES-notes
 
 theme:
   name: material
-  logo: _static/icon.png
+  logo: assets/icon.png
   features:
     - content.code.annotate
     - content.code.copy
-  favicon: _static/icon.png
+  favicon: assets/icon.png
   palette:
-    - media: '(prefers-color-scheme: light)'
+    - media: "(prefers-color-scheme: light)"
       scheme: default
-      primary: blue grey
+      primary: pink
       toggle:
         icon: material/brightness-7
         name: Dark mode
 
-    - media: '(prefers-color-scheme: dark)'
+    - media: "(prefers-color-scheme: dark)"
       scheme: slate
-      primary: deep purple
+      primary: pink
       toggle:
         icon: material/brightness-4
         name: Light mode
@@ -32,7 +32,7 @@ markdown_extensions:
       anchor_linenums: true
   - pymdownx.inlinehilite
   - pymdownx.snippets:
-      base_path: [ 'codes' ]
+      base_path: ["codes"]
   - pymdownx.superfences
   - attr_list
   - pymdownx.emoji:
@@ -45,7 +45,6 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 nav:
-  - About: index.md
-  - Resumos:
-      - Tópico 0: resumos/aula1.md
-      - Tópico 1: resumos/aula2.md
+  - Fundamentos de Testes: resumos/aula1.md
+  - Psicologia e Economia em Testes de Software: resumos/aula2.md
+  - Técnicas de Teste Caixa-Preta: resumos/aula3.md
