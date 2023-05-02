@@ -32,7 +32,7 @@ markdown_extensions:
       anchor_linenums: true
   - pymdownx.inlinehilite
   - pymdownx.snippets:
-      base_path: ['codes']
+      base_path: [ 'codes' ]
   - pymdownx.superfences
   - attr_list
   - pymdownx.emoji:
@@ -46,4 +46,6 @@ extra_javascript:
 
 nav:
   - About: index.md
-
+  - Resumos:
+      - Tópico 0: resumos/aula1.md
+      - Tópico 1: resumos/aula2.md
