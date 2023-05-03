@@ -45,6 +45,6 @@ extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 nav:
-  - Fundamentos de Testes: resumos/aula1.md
-  - Psicologia e Economia em Testes de Software: resumos/aula2.md
-  - Técnicas de Teste Caixa-Preta: resumos/aula3.md
+  - Fundamentos de Testes: aula1.md
+  - Psicologia e Economia em Testes de Software: aula2.md
+  - Técnicas de Teste Caixa-Preta: aula3.md

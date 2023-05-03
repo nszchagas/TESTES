@@ -54,11 +54,11 @@ A partir das questões discutidas nas seções anteriores, é possível identifi
   deveria**.
 - Casos de teste não devem ser descartados a menos que o programa serja descartável.
 - Testes devem ser planejados com o intuito de encontrar erros.
-- A probabilidade de existência de mais erros em uma seção do progrmaa é proporcional ao número de erros já encontrados
+- A probabilidade de existência de mais erros em uma seção do programa é proporcional ao número de erros já encontrados
   naquela seção.
 - Testar é uma atividade de criatividade e desafio intelectual.
 
-# Testagem de Software Sistemática e Eficaz
+## Testagem de Software Sistemática e Eficaz
 
 Atualmente estão disponíveis diversas ferramentas para testes, como JUnit, AssertJ e Selenium, por exemplo, e
 embora a comunidade de desenvolvedores tenha se apropriado bem dessas ferramentas, ainda há falhas na utilização de
@@ -66,7 +66,7 @@ técnicas mais sistemáticas para encontrar erros.
 
 ## Testagem Durante o Desenvolvimento
 
-Os testes podem integrar-se às etapas de desenvovimento seguindo o seguinte fluxo interativo:
+Os testes podem integrar-se às etapas de desenvolvimento seguindo o seguinte fluxo interativo:
 
 1. O desenvolvimento inicia-se a partir de um requisito, que pode estar especificado em diversos formatos.
 2. O desenvolvedor desenvolve pequenos ciclos de TDD (*test-driven development*) para ter *feedback* rápido sobre o
@@ -83,25 +83,33 @@ Os testes podem integrar-se às etapas de desenvovimento seguindo o seguinte flu
    identificados por ele.
 7. Após essa sessão completa e detalhada de testes, o desenvolvedor se sente seguro para fazer sua *release*.
 
-## Princípios dos Testes de Software
+## Diretrizes dos Testes de Software
 
 A seguir, os princípios e diretrizes para a testagem de software.
 
 1. Testes exaustivos são impossíveis
-	- Por esse motivo, é importante fazer testes eficazes.
+
+   - Por esse motivo, é importante fazer testes eficazes.
+
 2. Saber quando parar de testar
 3. O paradoxo do Pesticida
-	- Não existe técnica de teste efetiva em 100% dos casos, por isso testadores devem usar diferentes técnicas de
-	  teste.
+
+   - Não existe técnica de teste efetiva em 100% dos casos, por isso testadores devem usar diferentes técnicas de
+   teste.
+
 4. Bugs aglomeram-se
-	- Princípio da localidade e temporalidade, uma vez encontrado um bug, é provável encontrar outros na mesma
-	  região, criados pela mesma pessoa e/ou no mesmo período.
+
+   - Princípio da localidade e temporalidade, uma vez encontrado um bug, é provável encontrar outros na mesma região, criados pela mesma pessoa e/ou no mesmo período.
+
 5. Nenhum teste será perfeito ou suficiente
 6. Contexto é essencial
-	- Utilizar casos de teste em contextos diferentes (exemplo: aplicações mobile e web) não é eficiente.
+
+   - Utilizar casos de teste em contextos diferentes (exemplo: aplicações mobile e web) não é eficiente.
+
 7. Verificação não é validação
-	- **Verificação**: confirmação de que os requisitos especificados foram contemplados; -   **Validação**: confirmação
-	  de que os requisitos especificados foram contemplados para o uso esperado.
+
+- **Verificação**: confirmação de que os requisitos especificados foram contemplados; -   **Validação**: confirmação
+   de que os requisitos especificados foram contemplados para o uso esperado.
 
 ## A Pirâmide de Testes
 
@@ -130,13 +138,13 @@ Esses testes podem ser utilizados, por exemplo, para testar a comunicação entr
 > Os testes de sistema testam todas as partes de um sistema.
 
 Essa categoria de teste não se preocupa com o funcionamento interno do
-sistema ([teste caixa-branca](#testes-caixa-branca--white-box-testing-)), focando se as entradas geram as saídas
+sistema ([teste caixa-branca](#testes-caixa-branca-white-box-testing)), focando se as entradas geram as saídas
 esperadas.
 
 Esses testes são mais demorados que testes unitários, mais difíceis de escrever a mais propícios a resultados errados,
-provenientes de fatores extenos, como, por exemplo, a velocidade da *internet* utilizada na hora do teste.
+provenientes de fatores externos, como, por exemplo, a velocidade da *internet* utilizada na hora do teste.
 
-# Referências
+## Referências
 
 [1] MYERS, G., et al. The Art of Software Testing. ProQuest Ebook
 Central, disponível no [link](http://ebookcentral.proquest.com/lib/univbrasilia-ebooks/detail.action?docID=697721).
