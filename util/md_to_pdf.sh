@@ -23,7 +23,6 @@ fontsize: 12pt
 papersize: a4
 number-sections: false
 lang: pt-BR
-include-in-header:<style> h1,h2,h3,h4 {  background-color: red;}</style>
 
 ---
 $header
