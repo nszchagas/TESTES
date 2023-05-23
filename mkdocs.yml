@@ -36,9 +36,6 @@ markdown_extensions:
       base_path: ["codes"]
   - pymdownx.superfences
   - attr_list
-  - pymdownx.emoji:
-      emoji_index: !!python/name:materialx.emoji.twemoji
-      emoji_generator: !!python/name:materialx.emoji.to_svg
 
 extra_javascript:
   - js/mathjax.js
