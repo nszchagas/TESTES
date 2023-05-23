@@ -9,6 +9,7 @@ theme:
   features:
     - content.code.annotate
     - content.code.copy
+    - toc.integrate
   favicon: assets/icon.png
   palette:
     - media: "(prefers-color-scheme: light)"
@@ -48,3 +49,5 @@ nav:
   - Fundamentos de Testes: aula1.md
   - Psicologia e Economia em Testes de Software: aula2.md
   - Técnicas de Teste Caixa-Preta: aula3.md
+  - Trabalho:
+      - Testes Funcionais/Sistema Caixa-Preta: trabalho/relatorio_2.md
