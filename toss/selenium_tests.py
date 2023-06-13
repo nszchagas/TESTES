@@ -90,10 +90,11 @@ def create_instructors() -> List[str]:
     
 
 def activate_instructor(join_links: List[str]):
-    driver = webdriver.Edge()
-    actions = ActionChains(driver)
+    
     for link in join_links:
         try: 
+            driver = webdriver.Edge()
+            actions = ActionChains(driver)
             driver.get(link)
             actions = ActionChains(driver)
 
@@ -111,7 +112,6 @@ def activate_instructor(join_links: List[str]):
             driver.close()
         except Exception as e: 
             print(e)
-    driver.quit()
 
 
 def login(email: str, driver: webdriver):
@@ -156,8 +156,9 @@ def test(test_cases):
     driver.get(url)
     actions = ActionChains(driver)
     login(login_email, driver)
-
-    for b in driver.find_elements(By.CSS_SELECTOR, 'a.btn-success'):
+    buttons = driver.find_elements(By.CSS_SELECTOR, 'a.btn-success')
+    b = buttons[0]
+    for b in buttons:
         if b.get_attribute('innerHTML'):
             if 'Add New Course' in b.get_attribute('innerHTML'):
                 add_course_btn = b
@@ -184,15 +185,19 @@ def test(test_cases):
         c_name.send_keys(t.c_name)
         c_institute.send_keys(t.c_institute)
         c_timezone.send_keys(t.c_timezone)
-
+        driver.save_screenshot(f'screenshot/tc-{t.code}-0.png')
+        
+        
         actions.click(btn_add_course).perform()
+
+
 
         driver.implicitly_wait(1000)
 
         time.sleep(3)
-
+        driver.save_screenshot(f'screenshot/tc-{t.code}-1.png')
         confirmation = driver.find_elements(By.CSS_SELECTOR, '.toast-body')
-        
+
         assert len(confirmation) != 0
         try: 
             if (not t.error):
@@ -201,7 +206,7 @@ def test(test_cases):
                 assert "is not acceptable to TEAMMATES " in confirmation[0].get_attribute('innerHTML')
             t.result = 'Sucesso'
         except AssertionError as e:
-            print(f'Erro no caso de teste {t.code}: {e}.\nConteúdo da janela do teammates: {confirmation[0].get_attribute("innerHTML")}')
+            print(f'Erro no caso de teste {t.code}.')
             print(f'Valores de entrada: {t}')
             t.result = 'Erro'
             
@@ -217,9 +222,10 @@ def test(test_cases):
         
 
 url: str = 'http://localhost:4200'
-login_email: str = 'instrutor_testes@email.com'
+login_email: str = 'testing@example.com'
 admin_email: str = 'app_admin@gmail.com'
 testcases_file: str = 'test_cases.csv'
+
 
 # Se for a primeira vez rodando, será necessário criar o instrutor para o teste. Se já estiverem criados, não tem problema rodar.
 print('Criando instrutores para realizar os casos de teste.')
