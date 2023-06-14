@@ -10,6 +10,8 @@ theme:
     - content.code.annotate
     - content.code.copy
     - toc.integrate
+  extra_css:
+    - style.css
   favicon: assets/icon.png
   palette:
     - media: "(prefers-color-scheme: light)"
@@ -47,5 +49,6 @@ nav:
   - Psicologia e Economia em Testes de Software: aula2.md
   - Técnicas de Teste Caixa-Preta: aula3.md
   - Técnicas de Teste Caixa-Branca: aula4.md
+  - Test Driven Development (TDD): aula5.md
   - Trabalho:
       - Testes Funcionais/Sistema Caixa-Preta: trabalho/relatorio_2.md
