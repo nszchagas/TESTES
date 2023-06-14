@@ -1,0 +1,80 @@
+hr {
+    border-top: 3px solid black;
+}
+
+.cabecalho {
+    width: 100%
+}
+
+v:after {
+    font-weight: bold;
+    color: green;
+    counter-increment: validClass;
+    white-space: pre;
+    content: " (V." counter(validClass)")\a";
+}
+
+iv:after {
+    font-weight: bold;
+    color: red;
+    counter-increment: invalidClass;
+    white-space: pre;
+    content: " (I." counter(invalidClass)")\a";
+}
+
+tc:after {
+    font-weight: bold;
+    color: blue;
+    counter-increment: testCase;
+    content: counter(testCase, upper-alpha);
+}
+
+tce:before {
+    font-weight: bold;
+    font-size: medium;
+    counter-increment: testCaseExecuted;
+    content: "Execução do Caso de Teste " counter(testCaseExecuted, upper-alpha);
+}
+
+fig {
+    padding: 0;
+    margin: 0;
+}
+
+fig:before {
+    counter-increment: figuras;
+    white-space: pre;
+    content: "Figura " counter(figuras) ". ";
+}
+
+fig:after {
+    white-space: pre;
+    content: " (Fonte: elaborado pelo autor, 2023)";
+}
+
+body {
+    counter-reset: section validClass invalidClass testCase figuras testCaseExecuted;
+}
+
+h2 {
+    counter-reset: subsection figure;
+}
+
+h2:before {
+    counter-increment: section;
+    content: counter(section) ". ";
+}
+
+h3:before {
+    counter-increment: subsection;
+    content: counter(section) "." counter(subsection) " ";
+}
+
+img {
+    max-width: 100%
+}
+
+td,
+th {
+    vertical-align: middle !important;
+}
