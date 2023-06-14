@@ -1,5 +1,3 @@
-package com.packtpublishing.tddjava.ch03tictactoe;
-
 //--8<-- [start:setup]
 
 enum Piece {
