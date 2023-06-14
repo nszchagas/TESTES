@@ -1,12 +1,5 @@
-//--8<-- [start:setup]
+package main;
 
-enum Piece {
-    X, O
-}
-
-enum Result {
-    DRAW, X_WIN, O_WIN
-}
 
 public class TicTacToe {
 
@@ -26,8 +19,6 @@ public class TicTacToe {
 
     }
 
-    //--8<-- [end:setup]
-//--8<-- [start:req1]
     public void play(int x, int y) {
         checkCoordinate(x);
         checkCoordinate(y);
@@ -47,11 +38,9 @@ public class TicTacToe {
 
     private void checkField(int x, int y) {
         if (this.board[x][y] != null)
-            throw new RuntimeException(String.format("Piece placed in occupied field (%d, %d).", x, y));
+            throw new RuntimeException(String.format("main.Piece placed in occupied field (%d, %d).", x, y));
     }
 
-    //--8<-- [end:req1]
-    //--8<-- [start:req3]
     public Result getWinner() {
 
         Piece winner;
@@ -96,8 +85,6 @@ public class TicTacToe {
         if (p == null) return Result.DRAW;
         return p == Piece.X ? Result.X_WIN : Result.O_WIN;
     }
-//--8<-- [end:req3]
-//--8<-- [start:req2]
 
     public Piece getNextPlayer() {
         if (this.lastPlayed == null) return Piece.X;
@@ -110,7 +97,6 @@ public class TicTacToe {
                 return null;
         }
     }
-//--8<-- [end:req2]
 
 
 }
