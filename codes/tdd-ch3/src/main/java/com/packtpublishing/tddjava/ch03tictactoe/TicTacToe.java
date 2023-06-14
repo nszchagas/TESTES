@@ -1,8 +1,6 @@
 package com.packtpublishing.tddjava.ch03tictactoe;
 
-/**
- * Created by vfarcic on 19/03/15.
- */
+//--8<-- [start:setup]
 
 enum Piece {
     X, O
@@ -20,6 +18,7 @@ public class TicTacToe {
 
     private Piece lastPlayed;
 
+
     public TicTacToe() {
         this.lastPlayed = null;
         this.board = new Piece[SIZE][SIZE];
@@ -29,6 +28,8 @@ public class TicTacToe {
 
     }
 
+    //--8<-- [end:setup]
+//--8<-- [start:req1]
     public void play(int x, int y) {
         checkCoordinate(x);
         checkCoordinate(y);
@@ -42,8 +43,21 @@ public class TicTacToe {
     }
 
 
+    private void checkCoordinate(int value) {
+        if (value < 0 || value >= SIZE) throw new RuntimeException("Value out of boundaries.");
+    }
+
+    private void checkField(int x, int y) {
+        if (this.board[x][y] != null)
+            throw new RuntimeException(String.format("Piece placed in occupied field (%d, %d).", x, y));
+    }
+
+    //--8<-- [end:req1]
+    //--8<-- [start:req3]
     public Result getWinner() {
+
         Piece winner;
+
         for (int row = 0; row < SIZE; row++)
             if (this.board[row][0] == this.board[row][1] && this.board[row][1] == this.board[row][2]) {
                 winner = this.board[row][0];
@@ -51,7 +65,6 @@ public class TicTacToe {
                     return mapPieceToResult(winner);
                 }
             }
-
 
         for (int col = 0; col < SIZE; col++)
             if (this.board[0][col] == this.board[1][col] && this.board[1][col] == this.board[2][col]) {
@@ -61,14 +74,12 @@ public class TicTacToe {
                 }
             }
 
-
         if (this.board[0][0] == this.board[1][1] && this.board[1][1] == this.board[2][2]) {
             winner = this.board[0][0];
             if (winner != null) {
                 return mapPieceToResult(winner);
             }
         }
-
 
         if (this.board[2][0] == this.board[1][1] && this.board[1][1] == this.board[0][2]) {
             winner = this.board[2][0];
@@ -87,16 +98,8 @@ public class TicTacToe {
         if (p == null) return Result.DRAW;
         return p == Piece.X ? Result.X_WIN : Result.O_WIN;
     }
-
-    private void checkCoordinate(int value) {
-        if (value < 0 || value >= SIZE) throw new RuntimeException("Value out of boundaries.");
-
-    }
-
-    private void checkField(int x, int y) {
-        if (this.board[x][y] != null)
-            throw new RuntimeException(String.format("Piece placed in occupied field (%d, %d).", x, y));
-    }
+//--8<-- [end:req3]
+//--8<-- [start:req2]
 
     public Piece getNextPlayer() {
         if (this.lastPlayed == null) return Piece.X;
@@ -109,6 +112,7 @@ public class TicTacToe {
                 return null;
         }
     }
+//--8<-- [end:req2]
 
 
 }
