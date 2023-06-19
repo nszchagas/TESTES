@@ -20,6 +20,18 @@ c:after {
     content:" (" counter(condicoes)")\a";
 }
 
+T:before {
+    color: green;
+    font-weight: bold;
+    content: "T"
+}
+
+F:before {
+    color: red;
+    font-weight: bold;
+    content: "F"
+}
+
 fig, tab {
     padding: 0;
     margin: 0;
@@ -63,8 +75,18 @@ img {
     max-width: 100%
 }
 
+.header {
+    text-align: center !important;
+    font-weight: bold;
+}
+
 td, th {
    vertical-align: middle !important;
+
+}
+
+p {
+    text-align: justify;
 }
 
 </style>
@@ -189,58 +211,237 @@ Antes da incrementação dos testes existentes, o método de teste da classe est
 
 ## Tabela de decisões/condições
 
-```java title="teammates.common.util.TimeHelper.java" linenums="1"
-public static Instant getMidnightAdjustedInstantBasedOnZone(Instant instant, String timeZone, boolean isForward) {
-
-        if (isSpecialTime(instant)) { // isSpecialTime determina se o parâmetro instant é uma destas constantes: Const.TIME_REPRESENTS_FOLLOW_OPENING; Const.TIME_REPRESENTS_FOLLOW_VISIBLE; Const.TIME_REPRESENTS_LATER; Const.TIME_REPRESENTS_NOW;         
-            return instant;
-        }
-        ZonedDateTime zonedDateTime = instant.atZone(ZoneId.of(timeZone));
-        if (isForward && zonedDateTime.getHour() == 23 && zonedDateTime.getMinute() == 59) {
-            zonedDateTime = zonedDateTime.plusMinutes(1L);
-        } else if (!isForward && zonedDateTime.getHour() == 0 && zonedDateTime.getMinute() == 0) {
-            zonedDateTime = zonedDateTime.minusMinutes(1L);
-        }
-        return zonedDateTime.toInstant();
-    }
-
-```
-
-| Decisão | Situação para `true` | Situação para `false` |
-| ------- | -------------------- | --------------------- |
-| 3 | O `instant` é um entre:<br/> `Const.TIME_REPRESENTS_FOLLOW_OPENING`<br/>`Const.TIME_REPRESENTS_FOLLOW_VISIBLE`<br/>`Const.TIME_REPRESENTS_LATER`<br/>`Const.TIME_REPRESENTS_NOW` | O `instant` não é uma dessas constantes. |
-| 7 | A formatação do tempo é para frente (`isForward == true`) e o horário é 23:59 | A formatação do tempo não é para frente (`isForward == false`) ou o horário é diferente de 23:59. |
-| 9 | A formatação do tempo não é para frente (`isForward == false`) e o horário é 00:00 | A formatação do tempo é para frente (`isForward == true`) ou o horário é diferente de 00:00.
+ |  Decisão  |  Situação para `true`  |  Situação para `false`  |
+ |  -------  |  --------------------  |  ---------------------  |
+ |  3  |  O `instant` é um entre:<br/> `Const.TIME_REPRESENTS_FOLLOW_OPENING`<br/>`Const.TIME_REPRESENTS_FOLLOW_VISIBLE`<br/>`Const.TIME_REPRESENTS_LATER`<br/>`Const.TIME_REPRESENTS_NOW`  |  O `instant` não é uma dessas constantes.  |
+ |  7  |  A formatação do tempo é para frente (`isForward == true`) e o horário é 23:59  |  A formatação do tempo não é para frente (`isForward == false`) ou o horário é diferente de 23:59.  |
+ |  9  |  A formatação do tempo não é para frente (`isForward == false`) e o horário é 00:00  |  A formatação do tempo é para frente (`isForward == true`) ou o horário é diferente de 00:00.
 
 <tab> Identificação das decisões. </tab>
 
-| Decisão | Condição | Situação para `true` | Situação para `false` |
-| ------- | -------- | -------------------- | --------------------- |
-| 3  | `isSpecialTime(instant)` | `instant` é um entre:<br/> `Const.TIME_REPRESENTS_FOLLOW_OPENING`<br/>`Const.TIME_REPRESENTS_FOLLOW_VISIBLE`<br/>`Const.TIME_REPRESENTS_LATER`<br/>`Const.TIME_REPRESENTS_NOW`  <c/> | `instant` é diferente desses.  <c/> |
-| 7A |  `isForward` | `isForward==true`  <c/> | `isForward==false`  <c/> |
-| 7B | `zonedDateTime.getHour() == 23` | O `instant` está entre `23:00` e `23:59`.  <c/>| O `instant` está fora do intervalo de `23:00` à `23:59`.  <c/>|
-| 7C | `zonedDateTime.getMinute() == 59` | O `instant` é do tipo `hh:59`, com hh entre 0 e 23.  <c/>| O `instant` é do tipo `hh:mm`, com `mm != 59`.  <c/>|
-| 9A | `!isForward` | `isForward==false`  <c/>| `isForward==true`  <c/>|
-| 9B | `zonedDateTime.getHour() == 0` | O `instant` está entre `00:00` e `00:59`.  <c/>| O `instant` está fora do intervalo de `00:00` à `00:59`.  <c/>|
-| 9C | `zonedDateTime.getMinute() == 0` |  O `instant` é do tipo `hh:00`, com hh entre 0 e 23.  <c/>| O `instant` é do tipo `hh:mm`, com `mm != 00`. <c/>|
+ | Decisão | Condição                          | Situação para `true`                                                                                                                                                                 | Situação para `false`                                           |
+ | ------- | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------- |
+ | 3       | `isSpecialTime(instant)`          | `instant` é um entre:<br/> `Const.TIME_REPRESENTS_FOLLOW_OPENING`<br/>`Const.TIME_REPRESENTS_FOLLOW_VISIBLE`<br/>`Const.TIME_REPRESENTS_LATER`<br/>`Const.TIME_REPRESENTS_NOW`  <c/> | `instant` é diferente desses.  <c/>                             |
+ | 7A      | `isForward`                       | `isForward==true`  <c/>                                                                                                                                                              | `isForward==false`  <c/>                                        |
+ | 7B      | `zonedDateTime.getHour() == 23`   | O `instant` está entre `23:00` e `23:59`.  <c/>                                                                                                                                      | O `instant` está fora do intervalo de `23:00` à `23:59`.  <c/ > |
+ | 7C      | `zonedDateTime.getMinute() == 59` | O `instant` é do tipo `hh:59`, com hh entre 0 e 23.  <c/>                                                                                                                            | O `instant` é do tipo `hh:mm`, com `mm != 59`.  <c/ >           |
+ | 9A      | `!isForward`                      | `isForward==false`  <c/>                                                                                                                                                             | `isForward==true`  <c/ >                                        |
+ | 9B      | `zonedDateTime.getHour() == 0`    | O `instant` está entre `00:00` e `00:59`.  <c/>                                                                                                                                      | O `instant` está fora do intervalo de `00:00` à `00:59`.  <c/ > |
+ | 9C      | `zonedDateTime.getMinute() == 0`  | O `instant` é do tipo `hh:00`, com hh entre 0 e 23.  <c/>                                                                                                                            | O `instant` é do tipo `hh:mm`, com `mm != 00`. <c/ >            |
 
 <tab>Identificação das condições.</tab>
 
 ## Especificação dos Casos de Teste
 
-| Número | Condições | Combinações | `instant` | `timeZone` | `isForward` | Saída Esperada |
-| ------ | --------- | ----------- | --------- | ---------- | ----------- | -------------- |
-| 1      |
+A técnica das combinações múltiplas foi utilizadas para a determinação dos casos de teste, representados na tabela a seguir. Observe que 7A e 9A são opostas, então não é possível 7A == 9A. As condições 7B e 9B são incompatíveis, então não é possível ter 7B == 9B. As condições 7C e 9C são incompatíveis, então não é possível ter 7C == 9B. Como todas as constantes especiais de tempo possuem horário `00:00`, a condição 3 ser verdadeira implica em 9B e 9C verdadeiros e 7B e 7C falsos. Levando em consideração esses fatores, as combinações possíveis entre as decisões 7A, 7B e 7C e as decisões 9A, 9B e 9C foram representadas na tabela a seguir.
+
+ | Número da combinação | 3    | 7A   | 7B   | 7C   | 9A   | 9B   | 9C   | Caso de Teste |
+ | -------------------- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ------------- |
+ | #1                   | X    | <F/> | <F/> | <F/> | <T/> | <T/> | <T/> | 3             |
+ | #2                   | <F/> | <F/> | <F/> | <T/> | <T/> | <T/> | <F/> | 4             |
+ | #3                   | <F/> | <F/> | <T/> | <F/> | <T/> | <F/> | <T/> | 5             |
+ | #4                   | <F/> | <F/> | <T/> | <T/> | <T/> | <F/> | <F/> | 2             |
+ | #5                   | X    | <T/> | <F/> | <F/> | <F/> | <T/> | <T/> | 1             |
+ | #6                   | <F/> | <T/> | <F/> | <T/> | <F/> | <T/> | <F/> | 6             |
+ | #7                   | <F/> | <T/> | <T/> | <F/> | <F/> | <F/> | <T/> | 7             |
+ | #8                   | <F/> | <T/> | <T/> | <T/> | <F/> | <F/> | <F/> | 8             |
+
+<tab> Combinações entre as condições. </tab>
+
+> X denota o 'don't care'.
+
+<table>
+
+<tr>
+<td rowspan="2" class="header"> Número </td>
+<td rowspan="2" class="header"> Condições  </td>
+<td colspan="3" class="header"> Condição de Entrada </td>
+<td  class="header"> Combinações  </td>
+<td rowspan="2" class="header"> Saída Esperada  </td>
+</tr>
+
+<tr>
+
+<td><code>instant</code></td>
+<td><code>timeZone</code></td>
+<td><code>isForward</code></td>
+<td class="header"> | 3 | 7A | 7B | 7C | 9A | 9B | 9C | </td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>1, 3, 6, 8, 10, 11, 13 </td>
+<td><code>TIME_REPRESENTS_FOLLOW_OPENING¹</code></td>
+<td>GMT-3</td>
+<td>true</td>
+<td> | <T/>  | <T/>  | <F/>  | <F/>  | <F/>  | <T/>  | <T/>  | </td>
+<td>TIME_REPRESENTES_FOLLOW_OPENING</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>2, 4, 5, 7, 9, 12, 14</td>
+<td>2023-05-31 23:59:00</td>
+<td>GMT-3</td>
+<td>false</td>
+<td> | <F/> | <F/> | <T/> | <T/> | <T/> | <F/> | <F/> |</td>
+<td>2023-05-31 23:59:00</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>-</td>
+<td>2023-05-31 00:00:00</td>
+<td>GMT-3</td>
+<td>false</td>
+<td>| <F/> | <F/> | <F/> | <F/> | <T/> | <T/> | <T/> |</td>
+<td>2023-05-30 23:59:00</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>-</td>
+<td>2023-05-31 00:59:00</td>
+<td>GMT-3</td>
+<td>false</td>
+<td>| <F/> | <F/> | <F/> | <T/> | <T/> | <T/> | <F/> |</td>
+
+<td>2023-05-31 00:59:00</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>-</td>
+<td>2023-05-31 23:00:00</td>
+<td>GMT-3</td>
+<td>false</td>
+
+<td>| <F/> | <F/> | <T/> | <F/> | <T/> | <F/> | <T/> |</td>
+
+<td>2023-05-31 23:00:00</td>
+</tr>
+
+<tr>
+<td>6</td>
+<td>-</td>
+<td>2023-05-31 00:59:00</td>
+<td>GMT-3</td>
+<td>true</td>
+
+<td>| <F/> | <T/> | <F/> | <T/> | <F/> | <T/> | <F/> |</td>
+
+<td>2023-05-31 00:59:00</td>
+</tr>
+
+<tr>
+<td>7</td>
+<td>-</td>
+<td>2023-05-31 23:00:00</td>
+<td>GMT-3</td>
+<td>true</td>
+
+<td>| <F/> | <T/> | <T/> | <F/> | <F/> | <F/> | <T/>| </td>
+
+<td>2023-05-31 23:00:00</td>
+</tr>
+
+<tr>
+<td>8</td>
+<td>-</td>
+<td>2023-05-31 23:59:00</td>
+<td>GMT-3</td>
+<td>true</td>
+
+<td>| <F/> |  <T/> |  <T/> |  <T/> |  <F/> |  <F/> |  <F/> |</td>
+
+<td>2023-06-01 00:00:00</td>
+</tr>
+
+</table>
+
+> ¹`Const.TIME_REPRESENTS_FOLLOW_OPENING = TimeHelper.parseInstant("1970-12-31 00:00:00Z")` como o horário dessa constante é 0:00, ela já satisfaz as condições 11 e 13.
 
 ## Implementação dos Casos de Teste
 
+```java title="TimeHelperTest.java" linenums="1"
+--8<--
+toss3/TimeHelperTest.java:method_test
+--8<--
+```
+
 ## Análise e Resultados
+
+Após a execução dos testes da classe TimeHelperTest.java o seguinte resultado foi obtido na console.
+
+```text
+
+> Task :compileJava UP-TO-DATE
+> Task :processResources UP-TO-DATE
+> Task :classes UP-TO-DATE
+> Task :compileTestJava UP-TO-DATE
+> Task :processTestResources UP-TO-DATE
+> Task :testClasses UP-TO-DATE
+> Task :componentTests
+Jun 19, 2023 7:53:04 PM teammates.common.util.Logger info
+INFO: teammates.logic.core.LogicStarter:initializeDependencies:43: Initialized dependencies between logic classes
+[=============================teammates.common.util.TimeHelperTest=============================]
+teammates.common.util.TimeHelperTest completed
+Jun 19, 2023 7:53:04 PM com.google.cloud.testing.BlockingProcessStreamReader writeLog
+INFO: [datastore] Adding handler(s) to newly registered Channel.
+component-tests > component-tests > teammates.common.util.TimeHelperTest > testEndOfYearDates PASSED
+component-tests > component-tests > teammates.common.util.TimeHelperTest > testFormatDateTimeForDisplay PASSED
+component-tests > component-tests > teammates.common.util.TimeHelperTest > testGetInstantDaysOffsetBeforeNow PASSED
+component-tests > component-tests > teammates.common.util.TimeHelperTest > testGetInstantDaysOffsetFromNow PASSED
+component-tests > component-tests > teammates.common.util.TimeHelperTest > testGetInstantHoursOffsetFromNow PASSED
+component-tests > component-tests > teammates.common.util.TimeHelperTest > testGetInstantNearestHourBefore PASSED
+component-tests > component-tests > teammates.common.util.TimeHelperTest > testGetMidnightAdjustedInstantBasedOnZone PASSED
+component-tests > component-tests > teammates.common.util.TimeHelperTest > 
+testGetMidnightAdjustedInstantBasedOnZoneWithProjectsTimeConstantShouldReturnSameConstant PASSED
+component-tests > component-tests > teammates.common.util.TimeHelperTest > 
+testGetMidnightAdjustedInstantBasedOnZoneWithTime0000notForwardShouldReturnPreviousDayAt2359 PASSED
+component-tests > component-tests > teammates.common.util.TimeHelperTest > 
+testGetMidnightAdjustedInstantBasedOnZoneWithTime0059andForwardShouldReturnSameInstant PASSED
+component-tests > component-tests > teammates.common.util.TimeHelperTest > 
+testGetMidnightAdjustedInstantBasedOnZoneWithTime0059notForwardShouldReturnSameInstant PASSED
+component-tests > component-tests > teammates.common.util.TimeHelperTest > 
+testGetMidnightAdjustedInstantBasedOnZoneWithTime2300andForwardShouldReturnSameInstant PASSED
+component-tests > component-tests > teammates.common.util.TimeHelperTest > 
+testGetMidnightAdjustedInstantBasedOnZoneWithTime2300notForwardShouldReturnSameInstant PASSED
+component-tests > component-tests > teammates.common.util.TimeHelperTest > 
+testGetMidnightAdjustedInstantBasedOnZoneWithTime2359andForwardShouldReturnNextDayAt0000 PASSED
+component-tests > component-tests > teammates.common.util.TimeHelperTest > 
+testGetMidnightAdjustedInstantBasedOnZoneWithTime2359notForwardFalseShouldReturnSameInstant PASSED
+
+```
+
+Nenhuma falha foi identificada na funcionalidade por meio dos testes realizados, uma vez que todos passaram com sucesso. A criação dos testes aumentou a cobertura de testes do método, conforme ilustrado na figura a seguir.
+
+<center>
+
+![](./assets/relatorio_3/1332.png)
+<fig>Cobertura de testes depois da adição dos novos testes.</fig>
+</center>
+
+<center>
+
+![](./assets/relatorio_3/1821.png)
+<fig>Cobertura de testes depois da adição dos novos testes.</fig>
+</center>
 
 ## Pull Request
 
+<center>
+
+![](./assets/relatorio_3/2141.png)
+<fig>Screenshot do Pull Request.</fig>
+</center>
+
 ## Links
 
-Fork do projeto: @TODO: inserir link
-Implementação no projeto: @TODO: inserir link
-Commit da implementação: @TODO: inserir link
-Pull Request: @TODO: inserir link
+ |  Descrição                 |  URL                                                                                                           |
+ |  ------------------------  |  ------------------------------------------------------------------------------------------------------------  |
+ |  Fork do projeto           |  <https://github.com/nszchagas/teammates>                                                                      |
+ |  Implementação no projeto  |  <https://github.com/nszchagas/teammates/blob/master/src/test/java/teammates/common/util/TimeHelperTest.java>  |
+ |  Commit da implementação   |  <https://github.com/nszchagas/teammates/commit/994a659202bcf2e25adad1450b5a0658eada7510>                      |
+ |  Pull Request              |  <https://github.com/TEAMMATES/teammates/pull/12486>                                                           |
+ |                            |                                                                                                                |

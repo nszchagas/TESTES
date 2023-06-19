@@ -39,4 +39,5 @@ public class TicTacToeBeanSpec {
         assertEquals(piece, bean.getPiece());
     }
 
+
 }

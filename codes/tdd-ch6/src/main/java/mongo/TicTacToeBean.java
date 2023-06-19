@@ -5,29 +5,28 @@ import org.jongo.marshall.jackson.oid.Id;
 
 import java.util.Objects;
 
-
+//--8<-- [start:setup]
 public class TicTacToeBean {
     @Id
-    private int turn;
-
-    private int x;
-
-    private int y;
-
-    private Piece piece;
-
+    private final int turn;
 
     public int getTurn() {
         return turn;
     }
 
+    private final int x;
+
     public int getX() {
         return x;
     }
 
+    private final int y;
+
     public int getY() {
         return y;
     }
+
+    private final Piece piece;
 
     public Piece getPiece() {
         return piece;
@@ -55,12 +54,8 @@ public class TicTacToeBean {
 
     @Override
     public String toString() {
-        return "TicTacToeBean{" +
-                "turn=" + turn +
-                ", x=" + x +
-                ", y=" + y +
-                ", piece=" + piece +
-                '}';
+        return "TicTacToeBean{" + "turn=" + turn + ", x=" + x + ", y=" + y + ", piece=" + piece + '}';
     }
 }
+//--8<-- [end:setup]
 

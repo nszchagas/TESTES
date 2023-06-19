@@ -27,13 +27,13 @@ TDD is a solution to approach the design in a different way, in such the program
 In order for tests to run fast and provide constant feedback, code needs to be organized in such a way that the methods, functions, and classes **can be easily replaced with mocks and stubs**. With or without mocks, the code should be written in a way that we
 can easily replace one dependency with another.
 
-## Chapter 3
+## Chapter 3 - Red-Green State
 
 The following code extracts use this structure:
 
 ```java title="TicTacToe.java" linenums="1"
 --8<--
-tdd-ch3/src/main/java/com/packtpublishing/tddjava/ch03tictactoe/TicTacToe.java:setup
+tdd-ch3/src/main/java/TicTacToe.java:setup
 --8<--
 }
 ```
@@ -48,7 +48,7 @@ Tests for this requirement:
 
 ```java title="TicTacToeSpec.java" linenums="1"
 --8<--
-tdd-ch3/src/test/java/com/packtpublishing/tddjava/ch03tictactoe/TicTacToeSpec.java:req1
+tdd-ch3/src/test/java/TicTacToeSpec.java:req1
 --8<--
 ```
 
@@ -58,7 +58,7 @@ Implementation passing all tests and after refactoring.
 
 ```java title="TicTacToe.java" linenums="1"
 --8<--
-tdd-ch3/src/main/java/com/packtpublishing/tddjava/ch03tictactoe/TicTacToe.java:req1
+tdd-ch3/src/main/java/TicTacToe.java:req1
 --8<--
 ```
 
@@ -72,7 +72,7 @@ Tests for this requirement:
 
 ```java title="TicTacToeSpec.java" linenums="1"
 --8<--
-tdd-ch3/src/test/java/com/packtpublishing/tddjava/ch03tictactoe/TicTacToeSpec.java:req2
+tdd-ch3/src/test/java/TicTacToeSpec.java:req2
 --8<--
 ```
 
@@ -82,7 +82,7 @@ Implementation passing all tests and after refactoring.
 
 ```java title="TicTacToe.java" linenums="1"
 --8<--
-tdd-ch3/src/main/java/com/packtpublishing/tddjava/ch03tictactoe/TicTacToe.java:req2
+tdd-ch3/src/main/java/TicTacToe.java:req2
 --8<--
 ```
 
@@ -96,7 +96,7 @@ Tests for this requirement:
 
 ```java title="TicTacToeSpec.java" linenums="1"
 --8<--
-tdd-ch3/src/test/java/com/packtpublishing/tddjava/ch03tictactoe/TicTacToeSpec.java:req3
+tdd-ch3/src/test/java/TicTacToeSpec.java:req3
 --8<--
 ```
 
@@ -106,7 +106,7 @@ Implementation passing all tests and after refactoring.
 
 ```java title="TicTacToe.java" linenums="1"
 --8<--
-tdd-ch3/src/main/java/com/packtpublishing/tddjava/ch03tictactoe/TicTacToe.java:req3
+tdd-ch3/src/main/java/TicTacToe.java:req3
 --8<--
 ```
 
@@ -120,7 +120,7 @@ Tests for this requirement:
 
 ```java title="TicTacToeSpec.java" linenums="1"
 --8<--
-tdd-ch3/src/test/java/com/packtpublishing/tddjava/ch03tictactoe/TicTacToeSpec.java:req4
+tdd-ch3/src/test/java/TicTacToeSpec.java:req4
 --8<--
 ```
 
@@ -130,7 +130,7 @@ Implementation passing all tests and after refactoring.
 
 ```java title="TicTacToe.java" linenums="1"
 --8<--
-tdd-ch3/src/main/java/com/packtpublishing/tddjava/ch03tictactoe/TicTacToe.java:req3
+tdd-ch3/src/main/java/TicTacToe.java:req3
 --8<--
 ```
 
@@ -142,3 +142,78 @@ tdd-ch3/src/main/java/com/packtpublishing/tddjava/ch03tictactoe/TicTacToe.java:r
 
 <fig>Results after running `gradle test jacocoReport`</fig>
 </center>
+
+## Chapter 6 - Mocking
+
+While focused on units, we must try to remove all dependencies that a unit might use. Removal of those dependencies is accomplished through a combination of design and mocking.
+
+Mocks are useful in situations such as:
+
+- Objects generating nondeterministic results, such as `java.util.Date`;
+- Objects that don't already exist, such as interface elements;
+- Objects with slow processing, such as databases.
+
+**Mock objects** simulate the behavior of real (often complex) objects. They allow us to create an object that will replace the real one used in the implementation code.
+
+The following code extracts use this structure. The Bean represents the DB's Entity.
+
+```java title="TicTacToeBean.java" linenums="1"
+--8<--
+tdd-ch6/src/main/java/mongo/TicTacToeBean.java:setup
+--8<--
+
+```
+
+### Requirement 1
+
+Implement an option to save a single move with the turn number, the X and Y axis positions, and the player (X or O).
+
+#### REQ1 - Red State
+
+Tests for this requirement:
+
+```java title="TicTacToeCollectionSpec.java" linenums="1"
+--8<--
+tdd-ch6/src/test/java/mongo/TicTacToeCollectionSpec.java:req1
+--8<--
+}
+```
+
+#### REQ1 - Green State
+
+Implementation passing all tests and after refactoring.
+
+```java title="TicTacToeCollection.java" linenums="1"
+--8<--
+tdd-ch6/src/main/java/mongo/TicTacToeCollection.java:req1
+--8<--
+}
+```
+
+<!-- ### Requirement 2
+
+Save each turn to the database
+
+#### REQ2 - Red State
+
+Tests for this requirement:
+
+```java title="TicTacToeSpec.java" linenums="1"
+--8<--
+tdd-ch6/src/test/java/main/TicTacToeSpec.java:req2
+--8<--
+```
+
+#### REQ2 - Green State
+
+Implementation passing all tests and after refactoring.
+
+```java title="TicTacToe.java" linenums="1"
+--8<--
+tdd-ch6/src/main/java/TicTacToe.java:req2
+--8<--
+``` -->
+
+## References
+
+[1] Test-Driven Java Development, Second Edition: Invoke TDD Principles for End-To-end Application Development, 2nd Edition, by Viktor Farcic, and Alex Garcia.
