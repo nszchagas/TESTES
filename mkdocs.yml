@@ -50,6 +50,7 @@ nav:
   - Técnicas de Teste Caixa-Preta: aula3.md
   - Técnicas de Teste Caixa-Branca: aula4.md
   - Test Driven Development (TDD): aula5.md
+  - DevSecOps: aula6.md
   - Trabalho:
       - Testes Funcionais/Sistema Caixa-Preta: trabalho/relatorio_2.md
       - Testes de Unidade: trabalho/relatorio_3.md
