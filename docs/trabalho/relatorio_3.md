@@ -4,20 +4,17 @@ hide:
 ---
 
 <style>
-hr {
-    border-top: 3px solid black;
-}
 
-.cabecalho {
- width: 100%
+body {
+    counter-reset: condicoes;
 }
 
 c:after {
     font-weight: bold;
     color: red;
-    counter-increment:condicoes;
+    counter-increment: condicoes;
     white-space: pre;
-    content:" (" counter(condicoes)")\a";
+    content: " (" counter(condicoes)")\a";
 }
 
 T:before {
@@ -30,63 +27,6 @@ F:before {
     color: red;
     font-weight: bold;
     content: "F"
-}
-
-fig, tab {
-    padding: 0;
-    margin: 0;
-    display: flex;
-    justify-content: center;
-}
-
-fig:before{
-    counter-increment:figuras;
-    white-space: pre;
-    content:"Figura " counter(figuras) ". ";
-}
-
-tab:before{
-    counter-increment:tables;
-    white-space: pre;
-    content:"Tabela " counter(tables) ". ";
-}
-
-fig:after, tab:after {
-    white-space: pre;
-
-    content: " (Fonte: elaborado pelo autor, 2023)";
-}
-
-body {counter-reset:section condicoes figuras tables ;}
-
-h2 {counter-reset:subsection figure;}
-
-h2:before{
-    counter-increment:section;
-    content:counter(section) ". ";
-}
-
-h3:before{
-    counter-increment:subsection;
-    content:counter(section) "." counter(subsection) " ";
-}
-
-img {
-    max-width: 100%
-}
-
-.header {
-    text-align: center !important;
-    font-weight: bold;
-}
-
-td, th {
-   vertical-align: middle !important;
-
-}
-
-p {
-    text-align: justify;
 }
 
 </style>

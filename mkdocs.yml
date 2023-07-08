@@ -10,8 +10,7 @@ theme:
     - content.code.annotate
     - content.code.copy
     - toc.integrate
-  extra_css:
-    - style.css
+
   favicon: assets/icon.png
   palette:
     - media: "(prefers-color-scheme: light)"
@@ -28,11 +27,10 @@ theme:
         icon: material/brightness-4
         name: Light mode
 
+extra_css:
+  - stylesheets/extra.css
+
 markdown_extensions:
-  - pymdownx.arithmatex:
-      generic: true
-  - pymdownx.highlight:
-      anchor_linenums: true
   - pymdownx.inlinehilite
   - pymdownx.snippets:
       base_path: ["codes"]
@@ -54,3 +52,4 @@ nav:
   - Trabalho:
       - Testes Funcionais/Sistema Caixa-Preta: trabalho/relatorio_2.md
       - Testes de Unidade: trabalho/relatorio_3.md
+      - TDD: trabalho/relatorio_4.md
