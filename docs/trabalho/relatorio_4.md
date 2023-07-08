@@ -1,6 +1,7 @@
 ---
 hide: 
     - navigation
+    - title
 ---
 <img src="https://fga.unb.br/marcus.chaffim/imagens/unb-fga-extenso.jpg">
 
@@ -15,6 +16,8 @@ hide:
 <hr>
 <p style="text-align: center"><b> Atividade 4 – TDD </b></p>
 <hr>
+
+# Atividade 4 - TDD
 
 ## Funcionalidade
 
@@ -169,7 +172,7 @@ Como esperado, a execução deste teste ocasiona o red state:
 
 <center>
 ![](./assets/relatorio_4/0750.png)
-<fig>Falha no teste.</fig>
+<fig>Testes no red state.</fig>
 </center>
 
 #### Implementação do Código
@@ -197,7 +200,7 @@ Como esperado, a execução deste teste ocasiona o red state:
 
 <center>
 ![](./assets/relatorio_4/1008.png)
-<fig></fig>
+<fig> Teste no green state.</fig>
 </center>
 
 #### Refatoração
@@ -222,7 +225,7 @@ it("Shouldn't contain undefined values", () => {
 
 <center>
 ![](./assets/relatorio_4/1150.png)
-<fig>Indicação do RED State.</fig>
+<fig>Testes no red state.</fig>
 </center>
 
 #### Implementação do Código
@@ -249,7 +252,7 @@ it("Shouldn't contain undefined values", () => {
 
 <center>
 ![](./assets/relatorio_4/1616.png)
-<fig>Green state.</fig>
+<fig> Teste no green state.</fig>
 </center>
 
 #### Refatoração
@@ -321,7 +324,7 @@ A execução destes testes indicou que a última opção já está contemplada n
 
 <center>
 ![](./assets/relatorio_4/4500.png)
-<fig>Indicação do RED State.</fig>
+<fig>Testes no red state.</fig>
 </center>
 
 #### Implementação do Código
@@ -352,7 +355,7 @@ A execução destes testes indicou que a última opção já está contemplada n
 
 <center>
 ![](./assets/relatorio_4/4741.png)
-<fig>Green state.</fig>
+<fig> Teste no green state.</fig>
 </center>
 
 #### Refatoração
@@ -459,7 +462,7 @@ it("Shouldn't quote boolean values", () => {
 <center>
 ![](./assets/relatorio_4/0259.png)
 
-<fig>Indicação do RED State.</fig>
+<fig>Testes no red state.</fig>
 </center>
 
 #### Implementação do Código
@@ -490,7 +493,7 @@ public static parseObjectToJSON(object: Object): string {
 <center>
 ![](./assets/relatorio_4/0426.png)
 
-<fig>Green state.</fig>
+<fig> Teste no green state.</fig>
 </center>
 
 #### Refatoração
@@ -524,7 +527,7 @@ export enum FeedbackSessionLogType {
 <center>
 ![](./assets/relatorio_4/1009.png)
 
-<fig>Indicação do RED State.</fig>
+<fig>Testes no red state.</fig>
 </center>
 
 #### Implementação do Código
@@ -555,7 +558,7 @@ public static parseObjectToJSON(object: Object): string {
 
 <center>
 ![](./assets/relatorio_4/1215.png)
-<fig>Green state.</fig>
+<fig> Teste no green state.</fig>
 </center>
 
 #### Refatoração
@@ -589,19 +592,303 @@ E a execução deste teste apontou que essa especificação também foi contempl
 <fig>Situação de Green State.</fig>
 </center>
 
+### Oitavo Ciclo
+
+Neste ciclo foi implementada a conversão de atributos do tipo. Para isso foi utilizado um objeto do tipo `Notifications`:
+
+```ts title="api-output.ts" linenums="1"
+export interface Notification extends ApiOutput {
+  notificationId: string;
+  startTimestamp: number;
+  endTimestamp: number;
+  createdAt: number;
+  style: NotificationStyle;
+  targetUser: NotificationTargetUser;
+  title: string;
+  message: string;
+  shown: boolean;
+}
+
+export interface Notifications extends ApiOutput {
+  notifications: Notification[];
+}
+
+
+export enum NotificationStyle {
+  PRIMARY = "PRIMARY",
+  SECONDARY = "SECONDARY",
+  SUCCESS = "SUCCESS",
+  DANGER = "DANGER",
+  WARNING = "WARNING",
+  INFO = "INFO",
+  LIGHT = "LIGHT",
+  DARK = "DARK",
+}
+
+
+export enum NotificationTargetUser {
+  STUDENT = "STUDENT",
+  INSTRUCTOR = "INSTRUCTOR",
+  GENERAL = "GENERAL",
+}
+
+
+```
+
+#### Teste - Red State
+
+```ts title="json-helper.spec.ts" linenums="1"
+it("Should parse array attribute", () => {
+        const input: Notifications = {
+            notifications: [
+                {
+                    notificationId: "41841",
+                    startTimestamp: 1688826966,
+                    endTimestamp: 1688827486,
+                    createdAt: 1688826999,
+                    style: NotificationStyle.WARNING,
+                    targetUser: NotificationTargetUser.STUDENT,
+                    title: "Activity wanting attention",
+                    message: "Don't forget to fill your feedback sessions.",
+                    shown: true,
+                },
+                {
+                    notificationId: "1894",
+                    startTimestamp: 1688812547,
+                    endTimestamp: 1688812458,
+                    createdAt: 1688812200,
+                    style: NotificationStyle.DANGER,
+                    targetUser: NotificationTargetUser.INSTRUCTOR,
+                    title: "Invalid Submission",
+                    message: "The data submitted for course was invalid.",
+                    shown: false,
+                }
+            ]
+        }
+        expect(JsonHelper.parseObjectToJSON(input)).toEqual(JSON.stringify(input))
+    })
+```
+
+<center>
+![](./assets/relatorio_4/![](./assets/relatorio_4/1009.png).png)
+<fig>Testes no red state.</fig>
+</center>
+
+#### Implementação do Código
+
+```ts title="json-helper.ts" linenums="1"
+public static parseObjectToJSON(object: Object): string {
+        let jsonResponse = "{"
+        const nonQuotable = ['number', 'boolean']
+        const entries = Object.entries(object).filter(entry => entry[1] !== undefined)
+        for (const entry of entries) {
+            const [key, value] = entry
+            jsonResponse += `"${key}":`;
+            if (!value || nonQuotable.indexOf(typeof value) != -1)
+                jsonResponse += value
+            else if (value instanceof Array) {
+                jsonResponse += '['
+                jsonResponse += value.map(value => this.parseObjectToJSON(value)).join(',')
+                jsonResponse += ']'
+            }
+            else if (typeof value === 'object')
+                jsonResponse += this.parseObjectToJSON(value)
+            else
+                jsonResponse += `"${value}"`
+            if (entries.indexOf(entry) != entries.length - 1)
+                jsonResponse += ","
+        }
+        jsonResponse += "}"
+        return jsonResponse
+    }
+```
+
+#### Teste - Green State
+
+<center>
+![](./assets/relatorio_4/4329.png)
+<fig> Teste no green state.</fig>
+</center>
+
+#### Refatoração
+
+Após a refatoração, o código ficou da seguinte maneira:
+
+```ts title="json-helper.ts" linenums="1"
+public static parseObjectToJSON(object: Object): string {
+        let jsonResponse = "{"
+        const nonQuotable = ['number', 'boolean']
+        const entries = Object.entries(object).filter(entry => entry[1] !== undefined)
+        for (const entry of entries) {
+            const [key, value] = entry
+            jsonResponse += `"${key}":`;
+            if (!value || nonQuotable.indexOf(typeof value) != -1)
+                jsonResponse += value
+            else if (value instanceof Array)
+                jsonResponse += `[${value.map(value => this.parseObjectToJSON(value)).join(',')}]`
+            else if (typeof value === 'object')
+                jsonResponse += this.parseObjectToJSON(value)
+            else
+                jsonResponse += `"${value}"`
+            if (entries.indexOf(entry) != entries.length - 1)
+                jsonResponse += ","
+        }
+        jsonResponse += "}"
+        return jsonResponse
+    }
+```
+
+Validada pela execução correta dos testes.
+
+<center>
+![](./assets/relatorio_4/4516.png)
+<fig>Testes em green state.</fig>
+</center>
+
+### Nono Ciclo
+
+Neste ciclo foi implementada a conversão de um array de objetos.
+
+#### Teste - Red State
+
+```ts title="json-helper.spec.ts" linenums="1"
+it("Should parse array attribute", () => {imagin
+        const input: Notifications = {
+            notifications: [
+                {
+                    notificationId: "41841",
+                    startTimestamp: 1688826966,
+                    endTimestamp: 1688827486,
+                    createdAt: 1688826999,
+                    style: NotificationStyle.WARNING,
+                    targetUser: NotificationTargetUser.STUDENT,
+                    title: "Activity wanting attention",
+                    message: "Don't forget to fill your feedback sessions.",
+                    shown: true,
+                },
+                {
+                    notificationId: "1894",
+                    startTimestamp: 1688812547,
+                    endTimestamp: 1688812458,
+                    createdAt: 1688812200,
+                    style: NotificationStyle.DANGER,
+                    targetUser: NotificationTargetUser.INSTRUCTOR,
+                    title: "Invalid Submission",
+                    message: "The data submitted for course was invalid.",
+                    shown: false,
+                }
+            ]
+        }
+        expect(JsonHelper.parseObjectToJSON(input)).toEqual(JSON.stringify(input))
+    })
+```
+
+<center>
+![](./assets/relatorio_4/4418.png)
+<fig>Testes no red state.</fig>
+</center>
+
+#### Implementação do Código
+
+```ts title="json-helper.ts" linenums="1"
+export class JsonHelper {
+
+    public static parseObjectToJSON(object: Object): string {
+        let jsonResponse: string;
+        if (object instanceof Array) {
+            jsonResponse = `[${object.map(obj => this.parseObjectToJSON(obj)).join(',')}]`
+
+        } else {
+            jsonResponse = "{"
+            const nonQuotable = ['number', 'boolean']
+            const entries = Object.entries(object).filter(entry => entry[1] !== undefined)
+            for (const entry of entries) {
+                const [key, value] = entry
+                jsonResponse += `"${key}":`;
+                if (!value || nonQuotable.indexOf(typeof value) != -1)
+                    jsonResponse += value
+                else if (value instanceof Array)
+                    jsonResponse += `[${value.map(value => this.parseObjectToJSON(value)).join(',')}]`
+                else if (typeof value === 'object')
+                    jsonResponse += this.parseObjectToJSON(value)
+                else
+                    jsonResponse += `"${value}"`
+                if (entries.indexOf(entry) != entries.length - 1)
+                    jsonResponse += ","
+            }
+            jsonResponse += "}"
+        }
+        return jsonResponse
+    }
+
+}
+```
+
+#### Teste - Green State
+
+<center>
+![](./assets/relatorio_4/![](./assets/relatorio_4/4329.png).png)
+</center>
+
+<fig> Teste no green state.</fig>
+</center>
+
+#### Refatoração
+
+Após a refatoração, o código ficou da seguinte maneira:
+
+```ts title="json-helper.ts" linenums="1"
+export class JsonHelper {
+
+    public static parseObjectToJSON(object: Object): string {
+
+        if (object instanceof Array)
+            return `[${object.map(obj => this.parseObjectToJSON(obj)).join(',')}]`
+
+        const entries = Object.entries(object).filter(entry => entry[1] !== undefined).map(entry => {
+            return `"${entry[0]}":${this.parseAttributeToJson(entry[1])}`;
+        })
+        return `{${entries.join(",")}}`
+    }
+
+    private static parseAttributeToJson(value: Object) {
+        const nonQuotable = ['number', 'boolean']
+        if (!value || nonQuotable.indexOf(typeof value) != -1)
+            return value
+        else if (value instanceof Array)
+            return `[${value.map(value => this.parseObjectToJSON(value)).join(',')}]`
+        else if (typeof value === 'object')
+            return this.parseObjectToJSON(value)
+        return `"${value}"`
+    }
+
+}
+```
+
+Validada pela execução correta dos testes.
+
+<center>
+![](./assets/relatorio_4/5433.png)
+<fig>Testes em green state.</fig>
+</center>
+
 ## Código Fonte
 
 | Descrição                | Link                                                                                                        |
 | ------------------------ | ----------------------------------------------------------------------------------------------------------- |
 | Código de teste          | [json-helper.spec.ts](https://github.com/nszchagas/teammates/blob/tdd/src/web/services/json-helper.spec.ts) |
 | Código da funcionalidade | [json-helper.ts](https://github.com/nszchagas/teammates/blob/tdd/src/web/services/json-helper.ts)           |
-| Commit                   | [Commit #cda69](https://github.com/nszchagas/teammates/commit/cda69ef105fcf779b4ab76c032d86533d8ac8999)     |
+| Commits                   | [Commit #cda69](https://github.com/nszchagas/teammates/commit/cda69ef105fcf779b4ab76c032d86533d8ac8999) e [Commit #a039a](https://github.com/nszchagas/teammates/commit/a039ada056d479fafb7510960afaf8208bdaf2f9)    |
 
 ## Resultado Final da Execução dos Testes
 
 <center>
-![](./assets/relatorio_4/2122.png)
+![](./assets/relatorio_4/5649.png)
 <fig>Resultado Final</fig>
 </center>
 
 ## Conclusão
+
+A realização de um método utilitário com a metodologia Test-Driven Development foi essencial para a fixação das etapas de desenvolvimento e documentação do requisito elaborado. A escolha da função teve maior influência pelo fator didático, uma vez que o próprio javascript faz essa conversão automaticamente com o método que foi utilizado para testar. Foram encontradas dificuldades em aplicar TDD em funcionalidades propostas em issues abertas, por envolverem mais conhecimento de código e do projeto em si. Além disso, durante o período do trabalho, não foi possível encontrar outros projetos com boas issues iniciais e propícias para o TDD, uma vez que muitas issues são referentes à problemas em interfaces, bugs visuais e problemas correlatos, que envolvem uma configuração maior dos testes, escapando do escopo do TDD. Como citado anteriormente, esse método, embora adequado para o aprendizado, não agrega valor ao produto `teammates`, por este motivo não foi realizado um `Pull Request`.
+
+Este documento explicita como os testes podem fornecer uma documentação detalhada acerca da funcionalidade, uma vez que pelos nomes dos testes realizados é possível extrair todos os critérios de aceitação do requisito especificado inicialmente, em um nível entre baixo e alto nível, isto é, esses requisitos estão em um nível de compreensão compatível com um analista de requisitos e um desenvolvedor.

@@ -6,7 +6,7 @@ fig {
 fig:before {
     counter-increment: figuras;
     white-space: pre;
-    content: "\a Figura " counter(figuras) ". ";
+    content: "Figura " counter(figuras) ". ";
 }
 
 
@@ -40,7 +40,7 @@ body {
 
 
 img {
-    max-width: 100%
+    max-width: 100%;
 }
 
 hr {
