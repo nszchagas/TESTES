@@ -1,0 +1,794 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../aula2/">
+      
+      
+        <link rel="next" href="../aula4/">
+      
+      
+      <link rel="icon" href="../assets/icon.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.5">
+    
+    
+      
+        <title>Técnicas de Teste Caixa-Preta - Testes de Software</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0e669242.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.85d0ee34.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tecnicas-de-teste-caixa-preta" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Testes de Software" class="md-header__button md-logo" aria-label="Testes de Software" data-md-component="logo">
+      
+  <img src="../assets/icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Testes de Software
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Técnicas de Teste Caixa-Preta
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nszchagas/TESTES-notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TESTES-notes
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Testes de Software" class="md-nav__button md-logo" aria-label="Testes de Software" data-md-component="logo">
+      
+  <img src="../assets/icon.png" alt="logo">
+
+    </a>
+    Testes de Software
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nszchagas/TESTES-notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TESTES-notes
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fundamentos de Testes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Psicologia e Economia em Testes de Software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Técnicas de Teste Caixa-Preta
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Técnicas de Teste Caixa-Preta
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#test-case-design" class="md-nav__link">
+    Test-Case Design
+  </a>
+  
+    <nav class="md-nav" aria-label="Test-Case Design">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testes-caixa-preta" class="md-nav__link">
+    Testes Caixa-Preta
+  </a>
+  
+    <nav class="md-nav" aria-label="Testes Caixa-Preta">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#particoes-equivalentes" class="md-nav__link">
+    Partições Equivalentes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identificando-as-classes-equivalentes" class="md-nav__link">
+    Identificando as Classes Equivalentes
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#identificando-os-casos-de-teste" class="md-nav__link">
+    Identificando os Casos de Teste
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#boundary-value-analysis" class="md-nav__link">
+    Boundary Value Analysis
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cause-effect-graphing" class="md-nav__link">
+    Cause-effect graphing
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#higher-order-testing" class="md-nav__link">
+    Higher-Order Testing
+  </a>
+  
+    <nav class="md-nav" aria-label="Higher-Order Testing">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#testes-de-funcao" class="md-nav__link">
+    Testes de Função
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    Referências
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Técnicas de Teste Caixa-Branca
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Test Driven Development (TDD)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DevSecOps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Trabalho
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Trabalho
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../trabalho/relatorio_2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testes Funcionais/Sistema Caixa-Preta
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../trabalho/relatorio_3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testes de Unidade
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../trabalho/relatorio_4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TDD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="tecnicas-de-teste-caixa-preta">Técnicas de Teste Caixa-Preta</h1>
+<h2 id="test-case-design">Test-Case Design</h2>
+<p>Uma vez que a a testagem não garante a ausência completa de erros, a estratégia que deve ser adotada ao elaborar casos de teste é <strong>determinar qual conjunto de casos de testes tem melhores probabilidades de encontrar a maior quantidade de erros</strong>.</p>
+<p>Em geral, a metodologia mais ineficiente é o teste com valores aleatórios, pois possui a menor probabilidade de encontrar erros. Uma boa escolha de casos de teste usa conceitos de testes caixa-branca e caixa-preta.</p>
+<h3 id="testes-caixa-preta">Testes Caixa-Preta</h3>
+<p>Testes caixa-preta são derivados a partir das especificações de um programa, e têm como objetivo identificar áreas nas quais o programa não se comporta como especificado.</p>
+<h4 id="particoes-equivalentes">Partições Equivalentes</h4>
+<p>Já que a testagem exaustiva não é possível, o testador deve selecionar um subconjunto de entradas possíveis para testar um programa, com uma altas probabilidades de encontrar a maior quantidade de erros.</p>
+<p>Uma ideia razoável é particionar o conjunto infinito de entradas possíveis em subconjuntos representantes de uma parcela, seguindo duas propriedades:</p>
+<ol>
+<li>Um caso de teste reduz, em mais do que um, o número de outros casos de teste que devem ser elaborados para atingir algum objetivo pré definido de testagem.</li>
+<li>Um caso de teste cobra um grande conjunto de outros casos de teste possíveis, ou seja, ele informa sobre a presença ou ausência de erros sobre um conjunto de valores de entrada.</li>
+</ol>
+<p>Essas duas considerações compõem a técnica caixa-preta de testagem denominada partição em equivalentes, por meio da seguinte metodologia:</p>
+<ol>
+<li>Selecionar condições para testagem utilizando a segunda propriedade, gerando classes equivalentes.</li>
+<li>Determinar o menor número possível de entradas para casos de teste cobrindo essas condições, utilizando a primeira propriedade, definindo casos de teste.</li>
+</ol>
+<h4 id="identificando-as-classes-equivalentes">Identificando as Classes Equivalentes</h4>
+<p>São identificadas tomando-se uma condição de entrada e particionando-a em dois ou mais grupos, dentre eles "equivalências válidas" e "equivalências inválidas".</p>
+<p>Diretrizes para identificar classes equivalentes:</p>
+<ol>
+<li>Se uma condição de entrada especifica um intervalo de entrada (1 &lt; x &lt; 50), identifique uma classe equivalente válida (e. g. x = 45) e duas inválidas (e. g. x &lt; 1  e x &gt; 50).</li>
+<li>Se uma condição de entrada especifica uma quantidade de valores (e. g. "Um aluno pode matricular-se de 1 até 8 matérias por semestre"), identifique uma classe válida e duas inválidas (nenhuma matéria ou mais do que 9 matérias).</li>
+<li>Se uma condição de entrada especifica um conjunto de valores válidos (e. g. tipo de documento: CPF, RG e PASSAPORTE), provavelmente o tratamento de cada uma delas é diferente, identifique uma classe válida para cada elemento desse conjunto e uma classe inválida (e. g. CDI).</li>
+<li>Se uma condição de entrada define uma situação obrigatória, como "o primeiro caractere do identificador deve ser uma letra", identifique uma classe válida (satisfazendo a condição) e uma inválida (não satisfazendo a condição).</li>
+</ol>
+<h4 id="identificando-os-casos-de-teste">Identificando os Casos de Teste</h4>
+<p>Depois de identificar as classes de equivalência, os casos de teste são identificados, a partir delas, pelo seguinte processo:</p>
+<ol>
+<li>Determine um valor único para cada classe de equivalência.</li>
+<li>Escreva novos casos de teste cobrindo o máximo de classes válidas não cobertas, até que todas as classes válidas sejam cobertas.</li>
+<li>Escreva um caso de testes para cobrir uma, e apenas uma, das classes inválidas não cobertas, até que todas sejam cobertas.</li>
+</ol>
+<blockquote>
+<p>A ideia de escrever testes únicos para as classes inválidas é evitar que os resultados dos testes sejam mascarados por outros casos de testes.</p>
+</blockquote>
+<h3 id="boundary-value-analysis">Boundary Value Analysis</h3>
+<p>Valores de fronteira (ou borda) são aqueles diretamente acima ou abaixo das fronteiras dos valores de entrada e saída das classes de equivalência. A análise dos valores de borda se distingue das partições equivalentes nos seguintes aspectos:</p>
+<ol>
+<li>Ao invés de escolher-se qualquer elemento em uma classe de equivalência como representativo, a análise dos valores de fronteira requer que um ou mais elementos sejam selecionados de forma que cada ponta da classe de equivalência seja testada.</li>
+<li>Testes são derivados tanto das condições de entrada como das saídas possíveis (espaço de resultados).</li>
+</ol>
+<p>Algumas diretrizes para elaboração desses testes são:</p>
+<ol>
+<li>Se uma condição de entrada especifica um intervalo de entrada (1 &lt; x &lt; 50), escreva casos de teste para as pontas do intervalo e casos de entrada inválidos para valores logo acima (ou abaixo) das fronteiras (e. g. x = 0, 1, 50 e 51).</li>
+<li>Se uma condição de entrada especifica uma quantidade de valores (e. g. "Um aluno pode matricular-se de 1 até 8 matérias por semestre"), escreva testes para valores de entrada logo acima (ou abaixo) dos valores (e. g. 0, 1, 8 e 9 matérias).</li>
+<li>Use a diretriz 1. para os valores de saída (e. g. Se um programa calcula valores juros resultando entre R$0,00 e R$150.000,00, escreva casos de teste para gerarem as saídas -0,01, 0, 150 mil e 150.000,01).</li>
+<li>Aplique a diretriz 2. para os valores de saída (e. g. Se um programa exibe uma lista dos últimos 5 documentos baixados, insira 0, 1, 2, 3, 4, 5 e 6para testar a exibição).</li>
+<li>Se a entrada ou saída de um programa é ordenado, destine atenção aos primeiro e último elementos do conjunto.</li>
+</ol>
+<h3 id="cause-effect-graphing">Cause-effect graphing</h3>
+<p>Um grafo de causa-efeito é uma maneira de traduzir em linguagem formal a linguagem natural da especificação. O grafo é, na verdade, um circuito lógico digital com uma notação simplificada.</p>
+<p>Para derivar os casos de teste, é necessário seguir os seguintes passos:</p>
+<ol>
+<li>Dividir a especificação em partes trabalháveis.</li>
+<li>Identificar as causas e efeitos na especificação, uma causa é uma condição distinta de entrada ou uma classe de equivalência de entradas, e um efeito é uma condição de saída ou uma transformação de sistema. Cada causa e efeito é identificada com um único número.</li>
+<li>A semântica da especificação é transformada em um grafo "<em>booleano</em>" ligando as causas e efeitos.</li>
+<li>O grafo é anotado com restrições descrevendo as combinações de causas e ou efeitos que são impossíveis por motivos de sintaxe ou restrições de ambiente.</li>
+<li>Fazendo o rastro de cada condição no grafo, uma tabela de decisões de entrada é criada. Cada coluna representa um caso de teste.</li>
+</ol>
+<p>A notação utilizada no diagrama está representada na figura 1.</p>
+<p><img alt="Notação do grafo causa-efeito.(Fonte: [1])" src="../imgs/notacao-causa-efeito.png" /></p>
+<!-- <div style="text-align: center"> -->
+<!-- Figura 1. Notação básica do grafo causa-efeito. (Fonte: [1]). -->
+<!-- </div> -->
+
+<p>Funções utilizadas:</p>
+<ul>
+<li>Identidade: <code>b = (a==1) ? 1 : 0;</code></li>
+<li>Not: <code>b = (a==1) ? 0 : 1;</code></li>
+<li>Or: <code>d = (a==1 || b==1 || c==1) ? 1 : 0;</code></li>
+<li>And: <code>c = (a==1 &amp;&amp; b==1) ? 1 : 0;</code></li>
+</ul>
+<blockquote>
+<p>0 e 1 denotam o estado ausente e presente para as causas e efeitos.</p>
+</blockquote>
+<p>Para ilustrar as restrições entre as causas, utiliza-se a notação representada na figura 2.</p>
+<p><img alt="Notação de restrições no grafo causa-efeito.(Fonte: [1])" src="../imgs/causa-efeito-restricoes.png" /></p>
+<!-- <div style="text-align: center"> -->
+<!-- Figura 2. Notação de restrições no grafo causa-efeito. (Fonte: [1]). -->
+<!-- </div> -->
+
+<p>Restrições entre causas:</p>
+<ul>
+<li>E: ou exclusivo (XOR), ou a, ou b, mas não ambos.</li>
+<li>I: ao menos um deve ser 1.</li>
+<li>O: apenas um pode ser 1.</li>
+<li>R: para que <code>a==1</code>, b deve ser 1.</li>
+</ul>
+<p>Também há a restrição Mask entre efeitos (figura 3)</p>
+<p><img alt="Notação de restrições de efeito no grafo causa-efeito. (Fonte: [1])" src="../imgs/causa-efeito-restricoes-efeitos.png" /></p>
+<!-- <div style="text-align: center"> -->
+<!-- Figura 3. Notação de restrições de efeito no grafo causa-efeito. (Fonte: [1]). -->
+<!-- </div> -->
+
+<p>Restrição entre efeitos</p>
+<ul>
+<li>M: Se <code>a==1</code>, então <code>b==0</code>.</li>
+</ul>
+<h2 id="higher-order-testing">Higher-Order Testing</h2>
+<p>O processo de desenvolvimento de software perpassa várias etapas, e falhas na comunicação entre essas etapas pode gerar erros. Além disso, durante as etapas são elaborados artefatos de documentação:</p>
+<ul>
+<li>Requisitos, que especificam porquê o programa é desejado.</li>
+<li>Objetivos, que especificam o que o programa deve fazer e quão bem isso deve ser feito.</li>
+<li>Especificações externas, que definem a representação exata do programa para os usuários.</li>
+<li>Documentação associada com os processos seguintes, com maiores níveis de detalhe, que especifica como o programa é construído.</li>
+</ul>
+<p>Para evitar erros no tratamento de informações entre as etapas de desenvolvimento, é possível seguir três diretrizes:</p>
+<ol>
+<li>Introdução de mais precisão no processo de desenvolvimento;</li>
+<li>Introdução de verificação no final de cada processo;</li>
+<li>Utilizar processos distintos de testes para cada processo de desenvolvimento.</li>
+</ol>
+<p><img alt="Relação entre os níveis de teste e as etapas do processo de desenvolvimento.(Fonte: [1])" src="../imgs/processos-e-testes.png" /></p>
+<!-- <div style="text-align: center"> -->
+<!-- Figura 4. Relação entre os níveis de teste e as etapas do processo de desenvolvimento. (Fonte: [1]). -->
+<!-- </div> -->
+
+<p>O objetivo dos testes:</p>
+<ul>
+<li>de módulo é encontrar discrepâncias entre os módulos dos programas e as especificações de suas interfaces.</li>
+<li>de função é mostrar que um sistema não está de acordo com a sua especificação externa.</li>
+<li>de sistema é mostrar que o produto é inconsistente com os objetivos originais.</li>
+</ul>
+<h3 id="testes-de-funcao">Testes de Função</h3>
+<p>São atividades de teste caixa-preta que visam encontrar discrepâncias entre um sistema e sua especificação externa, do ponto de vista do usuário final. Para realizar esse tipo de teste é possível utilizar as técnicas de teste caixa-preta mencionadas anteriormente, como, por exemplo, particionamento em equivalentes ou análise dos valores de borda.</p>
+<h3 id="referencias">Referências</h3>
+<p>[1] MYERS, G., et al. The Art of Software Testing. ProQuest Ebook
+Central, disponível no <a href="http://ebookcentral.proquest.com/lib/univbrasilia-ebooks/detail.action?docID=697721">link</a>.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      2022 Nicolas Souza
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.annotate", "content.code.copy", "toc.integrate"], "search": "../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.78eede0e.min.js"></script>
+      
+        <script src="../js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

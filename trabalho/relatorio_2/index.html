@@ -1,0 +1,1257 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../aula6/">
+      
+      
+        <link rel="next" href="../relatorio_3/">
+      
+      
+      <link rel="icon" href="../../assets/icon.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.5">
+    
+    
+      
+        <title>Testes Funcionais/Sistema Caixa-Preta - Testes de Software</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0e669242.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.85d0ee34.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#aplicacao" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Testes de Software" class="md-header__button md-logo" aria-label="Testes de Software" data-md-component="logo">
+      
+  <img src="../../assets/icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Testes de Software
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Testes Funcionais/Sistema Caixa-Preta
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nszchagas/TESTES-notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TESTES-notes
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Testes de Software" class="md-nav__button md-logo" aria-label="Testes de Software" data-md-component="logo">
+      
+  <img src="../../assets/icon.png" alt="logo">
+
+    </a>
+    Testes de Software
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nszchagas/TESTES-notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TESTES-notes
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fundamentos de Testes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Psicologia e Economia em Testes de Software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Técnicas de Teste Caixa-Preta
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Técnicas de Teste Caixa-Branca
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Test Driven Development (TDD)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DevSecOps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Trabalho
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Trabalho
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Testes Funcionais/Sistema Caixa-Preta
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Testes Funcionais/Sistema Caixa-Preta
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#aplicacao" class="md-nav__link">
+    Aplicação
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#especificacao-da-funcionalidade" class="md-nav__link">
+    Especificação da Funcionalidade
+  </a>
+  
+    <nav class="md-nav" aria-label="Especificação da Funcionalidade">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#requisitos" class="md-nav__link">
+    Requisitos
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#capturas-de-tela" class="md-nav__link">
+    Capturas de Tela
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#condicoes-de-entrada-e-de-saida" class="md-nav__link">
+    Condições de Entrada e de Saída
+  </a>
+  
+    <nav class="md-nav" aria-label="Condições de Entrada e de Saída">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classes-de-equivalencia" class="md-nav__link">
+    Classes de Equivalência
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analise-de-valor-limite" class="md-nav__link">
+    Análise de Valor Limite
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#especificacao-dos-casos-de-teste" class="md-nav__link">
+    Especificação dos Casos de Teste
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#execucao-dos-testes" class="md-nav__link">
+    Execução dos Testes
+  </a>
+  
+    <nav class="md-nav" aria-label="Execução dos Testes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#configuracao-do-ambiente" class="md-nav__link">
+    Configuração do Ambiente
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#testes-executados" class="md-nav__link">
+    Testes Executados
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resultados" class="md-nav__link">
+    Resultados
+  </a>
+  
+    <nav class="md-nav" aria-label="Resultados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#resumo" class="md-nav__link">
+    Resumo
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#falhas-identificadas" class="md-nav__link">
+    Falhas Identificadas
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    Conclusão
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../relatorio_3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testes de Unidade
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../relatorio_4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TDD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>Testes Funcionais/Sistema Caixa-Preta</h1>
+
+<style>
+hr {
+    border-top: 3px solid black;
+}
+
+.cabecalho {
+ width: 100%
+}
+
+v:after {
+    font-weight: bold;
+    color: green;
+    counter-increment:validClass;
+    white-space: pre;
+    content:" (V." counter(validClass)")\a";
+}
+
+iv:after {
+    font-weight: bold;
+    color: red;
+    counter-increment:invalidClass;
+    white-space: pre;
+    content:" (I." counter(invalidClass)")\a";
+}
+
+tc:after {
+    font-weight: bold;
+    color: blue;
+    counter-increment:testCase;
+    content:counter(testCase, upper-alpha);
+}
+
+tce:before {
+    font-weight: bold;
+    text-size: medium;
+    counter-increment:testCaseExecuted;
+    content:"Execução do Caso de Teste " counter(testCaseExecuted, upper-alpha);
+}
+
+fig {
+    padding: 0;
+    margin: 0;
+}
+
+fig:before {
+    counter-increment:figuras;
+    white-space: pre;
+    content:"Figura " counter(figuras) ". ";
+}
+
+fig:after {
+    white-space: pre;
+    content: " (Fonte: elaborado pelo autor, 2023)";
+}
+
+body {counter-reset:section validClass invalidClass testCase figuras testCaseExecuted;}
+
+h2 {counter-reset:subsection figure;}
+
+h2:before{
+    counter-increment:section;
+    content:counter(section) ". ";
+}
+
+h3:before{
+    counter-increment:subsection;
+    content:counter(section) "." counter(subsection) " ";
+}
+
+img {
+    max-width: 100%
+}
+
+td, th {
+   vertical-align: middle !important;
+}
+
+table#test-cases th, td {
+    text-align:center;
+    /*writing-mode: vertical-lr;*/
+
+}
+
+</style>
+
+<p><img src="https://fga.unb.br/marcus.chaffim/imagens/unb-fga-extenso.jpg"></p>
+<hr>
+
+<table class="cabecalho">
+<tr><td colspan=2><b>FGA 0238 Testes de Software - Turma 02 </b></td><td> <b>Semestre</b>  </td><td> 2023.1 </td></tr>
+<tr><td><b>Nome</b> </td><td> Nicolas Chagas Souza                </td><td> <b>Matrícula</b> </td><td> 20/0042327 </td></tr>
+<tr><td><b>Equipe</b></td><td> PassaNada</td></tr>
+</table>
+
+<hr>
+<p><center></p>
+<p><b> Atividade 2 – Desenvolver Testes Funcionais/Sistema Caixa-Preta </b></p>
+<p></center></p>
+<hr>
+
+<h2 id="aplicacao">Aplicação</h2>
+<p>A aplicação em teste é o TEAMMATES, que fornece funcionalidades para avaliação entre pares. Para utilizar o sistema, um instrutor deve solicitar uma conta na plataforma, em seguida, ele pode criar cursos, inscrever alunos nesses cursos, separados por grupos, e gerar sessões de avaliações por pares, onde cada integrante avalia a si mesmo e aos demais integrantes do grupo, por meio de questões definidas pelo instrutor.</p>
+<h2 id="especificacao-da-funcionalidade">Especificação da Funcionalidade</h2>
+<h3 id="requisitos">Requisitos</h3>
+<p>A funcionalidade testada é a de Criar Novos Cursos. Um instrutor pode criar zero ou mais cursos, cada qual com as seguintes informações:</p>
+<ul>
+<li>Identificação do Curso (obrigatório): Identificador do curso, na forma de texto, <strong>pode conter</strong> letras, números, pontos finais, hífenes, underlines e cifrões ($). <strong>Não pode</strong> se repetir, não pode ser maior do que 64 caracteres, não pode estar vazio, não pode conter espaços, deve possuir ao menos um símbolo alfanumérico.</li>
+<li>Nome do Curso (obrigatório): <strong>Deve</strong> começar com um caractere alfanumérico, possuir no máximo 80 caracteres, <strong>não pode</strong> conter barras verticais (|) ou símbolos de porcentagem (%).</li>
+<li>Instituição do Curso (obrigatório): Deve ser uma das instituições do instrutor.</li>
+<li>Fuso Horário (obrigatório): Deve ser um fuso horário válido.</li>
+</ul>
+<h3 id="capturas-de-tela">Capturas de Tela</h3>
+<p><center></p>
+<p><img alt="" src="../assets/relatorio_2/2308.png" />
+<fig> Tela de listagem de cursos, sem nenhum curso cadastrado além dos <i>default</i>.</fig>
+</center></p>
+<p><center></p>
+<p><img alt="" src="../assets/relatorio_2/2332.png" />
+<fig> Tela criação de curso, com campos preenchidos.</fig>
+</center></p>
+<p><center></p>
+<p><img alt="" src="../assets/relatorio_2/2344.png" />
+<fig>Mensagem de sucesso para curso criado.</fig>
+</center></p>
+<h2 id="condicoes-de-entrada-e-de-saida">Condições de Entrada e de Saída</h2>
+<h3 id="classes-de-equivalencia">Classes de Equivalência</h3>
+<p>A partir da especificação da funcionalidade foram identificadas as seguintes classes de equivalência.</p>
+<table>
+<tr> <th>  <b> Variável  </b></th><th> Classes Válidas </th><th> Classes Inválidas </th></tr>
+<tr> <td>  <b> Course ID  </b></td>
+<td>
+
+<v> Contém 1 ou mais letras</v>
+<v> Contém 1 ou mais números</v>
+<v> Contém 1 ou mais '.' (ponto final)</v>
+<v> Contém 1 ou mais '-' (hífen)</v>
+<v> Contém 1 ou mais '_' (underline)</v>
+<v> Contém 1 ou mais '$' (cifrão)</v>
+<v> 0 < tamanho < 65    </v>
+<v> Contém 1 ou mais símbolos alfanuméricos </v>
+<v> Não se repete </v>
+</td>
+
+<td>
+<iv> tamanho = 0</iv>
+<iv> tamanho >= 65</iv>
+<iv> Contém 1 ou mais ' ' (espaços) </iv>
+<iv> Não contém símbolos alfanuméricos </iv>
+<iv> Se repete</iv>
+</td>
+
+</tr>
+<tr> <td>  <b> Course name      </b></td>
+<td>
+<v> O primeiro caractere é alfanumérico</v>
+<v> 0 < tamanho < 81 </v>
+<v> Contém 1 ou mais caracteres especiais dentre:
+'@', '#', '$', '&', '*', '(', ')', '+', '\', '/', '?', '!', '[', ']', '{', '}', '-', '_', 'ª', 'º', "'", '"'  </v>
+
+</td>
+
+<td>
+
+<iv>Contém 1 ou mais '|' (barra vertical) </iv>
+<iv>Contém 1 ou mais '%' (porcentagem) </iv>
+<iv>tamanho = 0 </iv>
+<iv>tamanho >= 81 </iv>
+<iv>Primeiro caractere não alfanumérico</iv>
+</td>
+
+</tr>
+
+<tr> <td>  <b> Course Institute </b></td>
+<td>
+<v> É uma instituição cadastrada no sistema </v>
+<v> É uma das instituições do instrutor
+</td>
+<td>
+<iv> É uma instituição não cadastrada no sistema </iv>
+<iv> É uma instituição à qual o instrutor não pertence </iv>
+</td>
+</tr>
+<tr> <td><b> Time Zone </b></td>
+<td><v> É um fuso horário válido dentre os 24 existentes. </v></td>
+<td><iv> Qualquer outro valor </iv></td>
+</tr>
+</table>
+
+<blockquote>
+<p>Legenda:</p>
+<p><v style="counter-reset:validClass invalidClass">numeração das classes válidas: </v> <iv style="counter-reset:equivalenceClass">numeração das classes inválidas: </iv></p>
+</blockquote>
+<h3 id="analise-de-valor-limite">Análise de Valor Limite</h3>
+<p>A técnica de Análise de Valor Limite foi aplicada para determinar os limites válidos e inválidos para os intervalos numéricos, no caso o tamanho dos identificadores e nomes dos cursos.</p>
+<table>
+<thead>
+<tr>
+<th>Variável</th>
+<th>Limite Inferior Inválido</th>
+<th>Limite Inferior Válido</th>
+<th>Limite Superior Válido</th>
+<th>Limite Superior Inválido</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Course ID (tamanho)</td>
+<td>0</td>
+<td>1</td>
+<td>64</td>
+<td>65</td>
+</tr>
+<tr>
+<td>Course name (tamanho)</td>
+<td>0</td>
+<td>1</td>
+<td>80</td>
+<td>81</td>
+</tr>
+</tbody>
+</table>
+<h2 id="especificacao-dos-casos-de-teste">Especificação dos Casos de Teste</h2>
+<p>Todos os casos de teste levam em consideração um instrutor cadastrado nas instituições 'UnB e FGA' com o curso com ID "TESTE" já cadastrado. No sistema está cadastrada, para outro instrutor, a instituição Anhanguera.</p>
+<table id="test-cases" style="counter-reset: validClass invalidClass">
+
+<tr>
+<th rowspan=2> Casos de Teste</th>
+<th rowspan=2> Classes Contempladas </th>
+<th colspan=4 style="text-align:center"> Dados de Entrada </th>
+<th rowspan=2> Saída Esperada</th>
+</tr>
+<tr>
+
+<th>Course ID</th>
+<th>Course Name </th>
+<th>Course Institute</th>
+<th>Timezone</th>
+
+</tr>
+
+<tr>
+<td> <tc> </tc> </td>
+<td>
+
+<v></v><v></v><v></v><v></v><v></v><v></v><v></v><v></v><v></v><v></v><v></v><v></v><v></v><v></v><v></v>
+</td>
+<td> Testes-De-Software_T02-2023-Universidade.De.Brasilia$2023--01-TM<br/> (64 caracteres) </td>
+<td> abcd efghijklm nopqrstuvwxy zABCDEFGHIJKLMNOPQRSTUVWXYZ@\#$&*()+\/?![]{}-_ ªº""'' <br/> (80 caracteres) </td>
+<td> UnB </td>
+<td> America/Sao_Paulo (UTC -3) </td>
+<td> Curso criado. </td>
+</tr>
+
+<tr>
+<td> <tc> </tc> </td>
+<td> <iv ></iv> </td>
+<td> (0 caracteres) </td>
+<td> Curso de Teste </td>
+<td> UnB </td>
+<td> America/Sao_Paulo (UTC -3) </td>
+<td> Curso <b>não</b> criado. </td>
+</tr>
+<tr>
+<td> <tc> </tc> </td>
+<td> <iv></iv> </td>
+<td> Testes-De-Software_T02-2023-Universidade.De.Brasília$2023--01-TMS (65 caracteres) </td>
+<td> Curso de Teste </td>
+<td> UnB </td>
+<td> America/Sao_Paulo (UTC -3) </td>
+<td> Curso <b>não</b> criado. </td>
+</tr>
+<tr>
+<td> <tc> </tc> </td>
+<td> <iv ></iv> </td>
+<td> Testes deSoftware</td>
+<td> Curso de Teste </td>
+<td> UnB </td>
+<td> America/Sao_Paulo (UTC -3) </td>
+<td> Curso <b>não</b> criado. </td>
+</tr>
+
+<tr>
+<td> <tc> </tc> </td>
+<td> <iv ></iv> </td>
+<td> $_-. </td>
+<td> Curso de Teste </td>
+<td> UnB </td>
+<td> America/Sao_Paulo (UTC -3) </td>
+<td> Curso <b>não</b> criado. </td>
+</tr>
+
+<tr>
+<td> <tc> </tc> </td>
+<td> <iv ></iv> </td>
+<td> TESTE </td>
+<td> Curso de Teste </td>
+<td> UnB </td>
+<td> America/Sao_Paulo (UTC -3) </td>
+<td> Curso <b>não</b> criado. </td>
+</tr>
+
+<tr>
+<td> <tc> </tc> </td>
+<td> <iv ></iv> </td>
+<td> TestesDeSoftware </td>
+<td> Curso d|e Teste </td>
+<td> UnB </td>
+<td> America/Sao_Paulo (UTC -3) </td>
+<td> Curso <b>não</b> criado. </td>
+</tr>
+
+<tr>
+<td> <tc> </tc> </td>
+<td> <iv ></iv> </td>
+<td> TestesDeSoftware </td>
+<td> Curso d%e Teste </td>
+<td> UnB </td>
+<td> America/Sao_Paulo (UTC -3) </td>
+<td> Curso <b>não</b> criado. </td>
+</tr>
+
+<tr>
+<td> <tc> </tc> </td>
+<td> <iv ></iv> </td>
+<td> TestesDeSoftware </td>
+<td> (0 caracteres) </td>
+<td> UnB </td>
+<td> America/Sao_Paulo (UTC -3) </td>
+<td> Curso <b>não</b> criado. </td>
+</tr>
+
+<tr>
+<td> <tc> </tc> </td>
+<td> <iv ></iv> </td>
+<td> TestesDeSoftware </td>
+<td> abcd efghijklm nopqrstuvwxy zABCDEFGHIJKLMNOPQRSTUVWXYdZ@\#$&*()+\/?![]{}-_ ªº""'' <br/> (81 caracteres) </td>
+<td> UnB </td>
+<td> America/Sao_Paulo (UTC -3) </td>
+<td> Curso <b>não</b> criado. </td>
+</tr>
+
+<tr>
+<td> <tc> </tc> </td>
+<td> <iv ></iv> </td>
+<td> TestesDeSoftware </td>
+<td> @Curso de Teste </td>
+<td> UnB </td>
+<td> America/Sao_Paulo (UTC -3) </td>
+<td> Curso <b>não</b> criado. </td>
+</tr>
+
+<tr>
+<td> <tc> </tc> </td>
+<td> <iv ></iv> </td>
+<td> TestesDeSoftware </td>
+<td> Curso de Teste </td>
+<td> Católica </td>
+<td> America/Sao_Paulo (UTC -3) </td>
+<td> Curso <b>não</b> criado. </td>
+</tr>
+
+<tr>
+<td> <tc> </tc> </td>
+<td> <iv ></iv> </td>
+<td> TestesDeSoftware </td>
+<td> Curso de Teste </td>
+<td> FGA </td>
+<td> America/Sao_Paulo (UTC -3) </td>
+<td> Curso <b>não</b> criado. </td>
+</tr>
+
+<tr>
+<td> <tc> </tc> </td>
+<td> <iv ></iv> </td>
+<td> TestesDeSoftware </td>
+<td> Curso de Teste </td>
+<td> UnB </td>
+<td> X </td>
+<td> Curso <b>não</b> criado. </td>
+</tr>
+
+</table>
+
+<h2 id="execucao-dos-testes">Execução dos Testes</h2>
+<h3 id="configuracao-do-ambiente">Configuração do Ambiente</h3>
+<p>Inicialmente foram criados dois instrutores, de forma a ter mais de uma instituição cadastrada, e um curso com ID "TESTE" para um deles.</p>
+<p><center></p>
+<p><img alt="" src="../assets/relatorio_2/4527.png" /></p>
+<p><fig>Instrutores criados.</fig>
+</center></p>
+<p><center></p>
+<p><img alt="" src="../assets/relatorio_2/5038.png" />
+<fig>Curso TESTE criado.</fig>
+</center></p>
+<h3 id="testes-executados">Testes Executados</h3>
+<p><center></p>
+<p><img alt="" src="../assets/relatorio_2/0436.png" />
+<fig>Dados preenchidos.</fig>
+</center></p>
+<p><center></p>
+<p><img alt="" src="../assets/relatorio_2/0535.png" />
+<fig>Mensagem de sucesso e curso listado.</fig>
+</center>
+<center></p>
+<p><img alt="" src="../assets/relatorio_2/0628.png" />
+<fig>Captura de tela: <tce>.</fig>
+</center></p>
+<blockquote>
+<p><h4 style="color:red"> A validação do frontend não permite textos maiores do que 64 caracteres.
+<center></p>
+</blockquote>
+<p><img alt="" src="../assets/relatorio_2/1035.png" />
+<fig>Captura de tela: <tce>.</fig>
+</center></p>
+<p><center></p>
+<p><img alt="" src="../assets/relatorio_2/1127.png" />
+<fig>Captura de tela: <tce>.</fig>
+</center></p>
+<p><center></p>
+<p><img alt="" src="../assets/relatorio_2/1206.png" />
+<fig>Captura de tela: <tce>.</fig>
+</center></p>
+<p><center></p>
+<p><img alt="" src="../assets/relatorio_2/1349.png" />
+<fig>Captura de tela: <tce>.</fig>
+</center></p>
+<p><center></p>
+<p><img alt="" src="../assets/relatorio_2/1439.png" />
+<fig>Captura de tela: <tce>.</fig>
+</center></p>
+<p><center></p>
+<p><img alt="" src="../assets/relatorio_2/1503.png" />
+<fig>Captura de tela: <tce>.</fig>
+</center></p>
+<p><center></p>
+<p><img alt="" src="../assets/relatorio_2/1517.png" />
+<fig>Captura de tela: <tce>.</fig>
+</center></p>
+<blockquote>
+<p><h4 style="color:red"> A validação do frontend não permite textos maiores do que 81 caracteres.</h4></p>
+</blockquote>
+<p><center>
+<img alt="" src="../assets/relatorio_2/1617.png" />
+<fig>Captura de tela: <tce>.</fig>
+</center></p>
+<p><center></p>
+<p><img alt="" src="../assets/relatorio_2/1717.png" />
+<fig>Captura de tela: <tce>.</fig>
+</center></p>
+<blockquote>
+<p><h4 style="color:red"> A validação do frontend não permite a escolha de outras instituições.</p>
+</blockquote>
+<p><center></p>
+<p><img alt="" src="../assets/relatorio_2/1759.png" />
+<fig>Captura de tela: <tce> e <tce>.</fig>
+</center></p>
+<blockquote>
+<p><h4 style="color:red"> A validação do frontend não permite a escolha de outros fuso horários.</p>
+</blockquote>
+<p><center></p>
+<p><img alt="" src="../assets/relatorio_2/1852.png" />
+<fig>Captura de tela: <tce>.</fig>
+</center></p>
+<h2 id="resultados">Resultados</h2>
+<table>
+<thead>
+<tr>
+<th>Caso de Teste</th>
+<th>Resultado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td><span style="color:green"> <strong>Sucesso</strong></span></td>
+</tr>
+<tr>
+<td>B</td>
+<td><span style="color:green"> <strong>Sucesso</strong></span></td>
+</tr>
+<tr>
+<td>C</td>
+<td><span style="color:green"> <strong>Sucesso</strong></span></td>
+</tr>
+<tr>
+<td>D</td>
+<td><span style="color:green"> <strong>Sucesso</strong></span></td>
+</tr>
+<tr>
+<td>E</td>
+<td><span style="color:red">   <strong>Falha</strong></span></td>
+</tr>
+<tr>
+<td>F</td>
+<td><span style="color:green"> <strong>Sucesso</strong></span></td>
+</tr>
+<tr>
+<td>G</td>
+<td><span style="color:green"> <strong>Sucesso</strong></span></td>
+</tr>
+<tr>
+<td>H</td>
+<td><span style="color:green"> <strong>Sucesso</strong></span></td>
+</tr>
+<tr>
+<td>I</td>
+<td><span style="color:green"> <strong>Sucesso</strong></span></td>
+</tr>
+<tr>
+<td>J</td>
+<td><span style="color:green"> <strong>Sucesso</strong></span></td>
+</tr>
+<tr>
+<td>L</td>
+<td><span style="color:green"> <strong>Sucesso</strong></span></td>
+</tr>
+<tr>
+<td>M</td>
+<td><span style="color:green"> <strong>Sucesso</strong></span></td>
+</tr>
+<tr>
+<td>N</td>
+<td><span style="color:green"> <strong>Sucesso</strong></span></td>
+</tr>
+</tbody>
+</table>
+<p>No caso de <strong>teste E</strong> esperava-se que o curso não fosse cadastrado, houve falha no teste já que o curso foi cadastrado.</p>
+<h3 id="resumo">Resumo</h3>
+<table>
+<thead>
+<tr>
+<th><strong>Testes executados</strong></th>
+<th><strong>Testes com sucesso</strong></th>
+<th><strong>Taxa de sucesso</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>14</td>
+<td>13</td>
+<td>92,85%</td>
+</tr>
+</tbody>
+</table>
+<h2 id="falhas-identificadas">Falhas Identificadas</h2>
+<p>Durante a execução dos testes a única falha encontrada foi <strong>no caso de teste E</strong>, quando foi permitido cadastrar um curso sem caracteres alfanuméricos em seu ID. Portanto, o resultado esperado foi encontrado em 13 dos 14 testes, um total de 92,85% dos testes. Durante a execução dos casos de teste também foi identificada uma funcionalidade ainda não presente no sistema, o cadastro de palavras acentuadas, mas levando em consideração que o idioma do sistema é inglês, essa funcionalidade não foi testada e não se mostra necessária.</p>
+<h2 id="conclusao">Conclusão</h2>
+<p>Os casos de teste apontaram que as validações para os valores inseridos no cadastro de um curso funcionam adequadamente. A documentação dos requisitos do sistema não é clara em relação aos domínios de valores aceitos, portanto para a derivação dos casos de uso foram levados em consideração as restrições expressas nas mensagens de erro e o senso comum.</p>
+
+
+
+  
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      2022 Nicolas Souza
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.code.copy", "toc.integrate"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.78eede0e.min.js"></script>
+      
+        <script src="../../js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

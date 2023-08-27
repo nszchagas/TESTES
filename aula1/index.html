@@ -1,0 +1,726 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+        <link rel="next" href="../aula2/">
+      
+      
+      <link rel="icon" href="../assets/icon.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.5">
+    
+    
+      
+        <title>Fundamentos de Testes - Testes de Software</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0e669242.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.85d0ee34.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#fundamentos-de-testes" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Testes de Software" class="md-header__button md-logo" aria-label="Testes de Software" data-md-component="logo">
+      
+  <img src="../assets/icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Testes de Software
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Fundamentos de Testes
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nszchagas/TESTES-notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TESTES-notes
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Testes de Software" class="md-nav__button md-logo" aria-label="Testes de Software" data-md-component="logo">
+      
+  <img src="../assets/icon.png" alt="logo">
+
+    </a>
+    Testes de Software
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nszchagas/TESTES-notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TESTES-notes
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Fundamentos de Testes
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Fundamentos de Testes
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#causas-de-defeitos-em-software" class="md-nav__link">
+    Causas de defeitos em software
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testes-e-qualidade" class="md-nav__link">
+    Testes e Qualidade
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#terminologia" class="md-nav__link">
+    Terminologia
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#objetivos" class="md-nav__link">
+    Objetivos
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#testes-e-depuracao" class="md-nav__link">
+    Testes e depuração
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#paradoxos-e-principios" class="md-nav__link">
+    Paradoxos e Princípios
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#referencias" class="md-nav__link">
+    Referências
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Psicologia e Economia em Testes de Software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Técnicas de Teste Caixa-Preta
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Técnicas de Teste Caixa-Branca
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Test Driven Development (TDD)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../aula6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DevSecOps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Trabalho
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Trabalho
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../trabalho/relatorio_2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testes Funcionais/Sistema Caixa-Preta
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../trabalho/relatorio_3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testes de Unidade
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../trabalho/relatorio_4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TDD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<h1 id="fundamentos-de-testes">Fundamentos de Testes</h1>
+<p>Problemas de software não se limitam à pequenos inconvenientes, eles podem ser a causa de acidentes nos mais diversos
+níveis, inclusive fatalidades. A testagem correta de software é necessária para evitar frustrações, perdas financeiras,
+gastos necessários, danos à propriedade e até a morte de pessoas envolvidas, provenientes de falhas em software.</p>
+<p>Atualmente a vida humana depende intimamente de software, e para garantir uma qualidade de vida é necessário fazer a
+testagem rigorosa dos softwares e sistemas, incluindo suas documentações.</p>
+<h2 id="causas-de-defeitos-em-software">Causas de defeitos em software</h2>
+<p>A causa inicial (<em>root cause</em>) dos defeitos geralmente encontra-se nas ações (ou ausência de ações) humanas, como falha
+na especificação de requisitos. Já outras falhas não são causadas diretamente por seres humanos, mas sim por interações
+entre o objeto de teste e seu ambiente, como uma falha de software em detrimento do aquecimento de componentes
+eletrônicos.</p>
+<p>Uma ampla nomenclatura descreve o comportamento incorreto de software, mas o ISTQS (<em>International
+Software Testing Qualifications Board</em>) determina a utilização dos termos:</p>
+<ul>
+<li>Erro (<em>error</em>): ação humana na raiz de um defeito.</li>
+<li>Defeito (<em>defect</em>): resultado, presente no objeto de teste, de uma ação humana.</li>
+<li>Falha (<em>failure</em>): resultado da execução de um defeito por um processo.</li>
+</ul>
+<blockquote>
+<p>Defeitos podem estar presentes em software e também em documentos.</p>
+</blockquote>
+<h2 id="testes-e-qualidade">Testes e Qualidade</h2>
+<p>Testes e QA não são noções idênticas, a saber:</p>
+<ul>
+<li>A qualidade de software garante que os processos definidos pelas organizações são implementados, e da forma correta.
+  Além disso, a qualidade de software visa aumentar a eficiência e efetividade desses processos.</li>
+<li>Testes identificam defeitos e falhas e fornecem informações sobre o software e os riscos de lançamento deste no
+  mercado.</li>
+</ul>
+<p>A comunidade de Testes de Software não é uniforme, existem duas abordagem principais: tradicional e ágil.</p>
+<p>Na abordagem tradicional os testes são baseados em requisitos e especificações, e o software é analisado
+sistematicamente, com frequência gerando um grande volume de documentação. Essa metodologia baseia-se na definição e
+organização de atividades.</p>
+<p>Já a abordagem ágil baseia-se nas recomendações do Manifesto Ágil, baseando-se em avaliações pragmáticas de atividades
+de teste anteriores à entrega do software.</p>
+<h2 id="terminologia">Terminologia</h2>
+<p>As atividades de verificação e validação são complementares, a primeira responde à questão "o que foi especificado foi
+produzido?", enquanto a segunda responde se "o que foi construído é o produto correto?".</p>
+<p><strong>Verificação</strong>: confirmação de que os requisitos especificados foram contemplados.
+<strong>Validação</strong>: confirmação de que os requisitos especificados foram contemplados para o uso esperado.</p>
+<h2 id="objetivos">Objetivos</h2>
+<p>Testes de software focam-se nos seguintes aspectos:</p>
+<ul>
+<li>Detecção de falhas e defeitos;</li>
+<li>Fornecer informação para a tomada de decisões associadas ao nível de risco da entrega de um software ao mercado.</li>
+</ul>
+<p>Os objetivos mais específicos dos testes variam de acordo com a fase do desenvolvimento na qual eles são aplicados.</p>
+<table>
+<thead>
+<tr>
+<th>Fase</th>
+<th>Objetivo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><em>Design</em></td>
+<td>Encontrar o maior número de defeitos e falhas, no menor período de tempo possível, para entregar um software de alta qualidade.</td>
+</tr>
+<tr>
+<td>Aceitação do cliente</td>
+<td>Mostrar que o software funciona de acordo com o esperado para obter aprovação do cliente.</td>
+</tr>
+<tr>
+<td>Fases operacionais</td>
+<td>Enquanto o software está sendo usado, os testes focam em garantir que os requisitos exigidos estão sendo contemplados.</td>
+</tr>
+<tr>
+<td>Evolução/Manutenção de correção</td>
+<td>Garantir que as correções e evoluções não introduzem defeitos no software, além de verificar se não ocorrem efeitos colaterais (via testes de regressão).</td>
+</tr>
+<tr>
+<td>Descarte/Substituição</td>
+<td>Os testes criam uma <em>snapshot</em> do antigo produto, para que o produto subsequente possua as mesmas funcionalidades.</td>
+</tr>
+</tbody>
+</table>
+<div style="text-align: center"> Tabela 1: Objetivos da testagem de software. Fonte: autor. </div>
+
+<h2 id="testes-e-depuracao">Testes e depuração</h2>
+<p>De acordo com a ISO 05, Testagem é a identificação de uma ou mais características de acordo com um procedimento
+definido. No contexto de testagem de software, um teste possui os seguintes elementos:</p>
+<ul>
+<li>Objetivo (características que serão confirmadas);</li>
+<li>Uma forma de determinar as características (o processo definido e sua execução);</li>
+<li>Uma atividade (a execução do procedimento para obter um resultado);</li>
+<li>Um resultado (a presença ou ausência da característica no nível esperado);</li>
+</ul>
+<p>A depuração consiste no conserto de defeitos em software realizado pelos desenvolvedores, por meio da busca e remoção de
+causas exatas de falha. Essa tarefa não está envolvida no processo de testa.</p>
+<h2 id="paradoxos-e-principios">Paradoxos e Princípios</h2>
+<ul>
+<li>Testes identificam a presença de defeitos, mas não podem assegurar a ausência destes;</li>
+<li>Não é possível usar técnicas exaustivas para testar "tudo";</li>
+<li>Quanto mais cedo os testes são realizados, menos custoso será consertar os defeitos encontrados;</li>
+<li>Localidade dos defeitos, i. e., se um defeito foi encontrado em um trecho de código, trechos produzidos no mesmo
+  período ou pela mesma pessoa, por exemplo, apresentam uma maior chance de apresentar defeitos.</li>
+<li>Aplicar sempre os mesmos testes ao longo do tempo não é eficiente.</li>
+<li>A testagem depende do contexto;</li>
+<li>Ausência de erros não indica, necessariamente, qualidade do produto.</li>
+</ul>
+<h2 id="referencias">Referências</h2>
+<p>[1] HOMÈS, B. Fundamentals of Software Testings.</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      2022 Nicolas Souza
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["content.code.annotate", "content.code.copy", "toc.integrate"], "search": "../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.78eede0e.min.js"></script>
+      
+        <script src="../js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

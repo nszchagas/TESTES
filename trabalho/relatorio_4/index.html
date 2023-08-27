@@ -1,0 +1,2131 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../relatorio_3/">
+      
+      
+      
+      <link rel="icon" href="../../assets/icon.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.5">
+    
+    
+      
+        <title>TDD - Testes de Software</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0e669242.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.85d0ee34.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#atividade-4-tdd" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Testes de Software" class="md-header__button md-logo" aria-label="Testes de Software" data-md-component="logo">
+      
+  <img src="../../assets/icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Testes de Software
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              TDD
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nszchagas/TESTES-notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TESTES-notes
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Testes de Software" class="md-nav__button md-logo" aria-label="Testes de Software" data-md-component="logo">
+      
+  <img src="../../assets/icon.png" alt="logo">
+
+    </a>
+    Testes de Software
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nszchagas/TESTES-notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TESTES-notes
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fundamentos de Testes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Psicologia e Economia em Testes de Software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Técnicas de Teste Caixa-Preta
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Técnicas de Teste Caixa-Branca
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Test Driven Development (TDD)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DevSecOps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Trabalho
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Trabalho
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../relatorio_2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testes Funcionais/Sistema Caixa-Preta
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../relatorio_3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testes de Unidade
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    TDD
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    TDD
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#funcionalidade" class="md-nav__link">
+    Funcionalidade
+  </a>
+  
+    <nav class="md-nav" aria-label="Funcionalidade">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#identificacao-da-issue" class="md-nav__link">
+    Identificação da Issue
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#especificacao" class="md-nav__link">
+    Especificação
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#execucao" class="md-nav__link">
+    Execução
+  </a>
+  
+    <nav class="md-nav" aria-label="Execução">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#primeiro-ciclo" class="md-nav__link">
+    Primeiro Ciclo
+  </a>
+  
+    <nav class="md-nav" aria-label="Primeiro Ciclo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#teste-red-state" class="md-nav__link">
+    Teste - Red State
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementacao-do-codigo" class="md-nav__link">
+    Implementação do Código
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teste-green-state" class="md-nav__link">
+    Teste - Green State
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refatoracao" class="md-nav__link">
+    Refatoração
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#segundo-ciclo" class="md-nav__link">
+    Segundo Ciclo
+  </a>
+  
+    <nav class="md-nav" aria-label="Segundo Ciclo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#teste-red-state_1" class="md-nav__link">
+    Teste - Red State
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementacao-do-codigo_1" class="md-nav__link">
+    Implementação do Código
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teste-green-state_1" class="md-nav__link">
+    Teste - Green State
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refatoracao_1" class="md-nav__link">
+    Refatoração
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#terceiro-ciclo" class="md-nav__link">
+    Terceiro Ciclo
+  </a>
+  
+    <nav class="md-nav" aria-label="Terceiro Ciclo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#teste-red-state_2" class="md-nav__link">
+    Teste - Red State
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementacao-do-codigo_2" class="md-nav__link">
+    Implementação do Código
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teste-green-state_2" class="md-nav__link">
+    Teste - Green State
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refatoracao_2" class="md-nav__link">
+    Refatoração
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quarto-ciclo" class="md-nav__link">
+    Quarto Ciclo
+  </a>
+  
+    <nav class="md-nav" aria-label="Quarto Ciclo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#teste-red-state_3" class="md-nav__link">
+    Teste - Red State
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementacao-do-codigo_3" class="md-nav__link">
+    Implementação do Código
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teste-green-state_3" class="md-nav__link">
+    Teste - Green State
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refatoracao_3" class="md-nav__link">
+    Refatoração
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#quinto-ciclo" class="md-nav__link">
+    Quinto Ciclo
+  </a>
+  
+    <nav class="md-nav" aria-label="Quinto Ciclo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#teste-red-state_4" class="md-nav__link">
+    Teste - Red State
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sexto-ciclo" class="md-nav__link">
+    Sexto Ciclo
+  </a>
+  
+    <nav class="md-nav" aria-label="Sexto Ciclo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#teste-red-state_5" class="md-nav__link">
+    Teste - Red State
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementacao-do-codigo_4" class="md-nav__link">
+    Implementação do Código
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teste-green-state_4" class="md-nav__link">
+    Teste - Green State
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refatoracao_4" class="md-nav__link">
+    Refatoração
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setimo-ciclo" class="md-nav__link">
+    Sétimo Ciclo
+  </a>
+  
+    <nav class="md-nav" aria-label="Sétimo Ciclo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#teste-red-state_6" class="md-nav__link">
+    Teste - Red State
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementacao-do-codigo_5" class="md-nav__link">
+    Implementação do Código
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teste-green-state_5" class="md-nav__link">
+    Teste - Green State
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refatoracao_5" class="md-nav__link">
+    Refatoração
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oitavo-ciclo" class="md-nav__link">
+    Oitavo Ciclo
+  </a>
+  
+    <nav class="md-nav" aria-label="Oitavo Ciclo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#teste-red-state_7" class="md-nav__link">
+    Teste - Red State
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementacao-do-codigo_6" class="md-nav__link">
+    Implementação do Código
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teste-green-state_6" class="md-nav__link">
+    Teste - Green State
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refatoracao_6" class="md-nav__link">
+    Refatoração
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nono-ciclo" class="md-nav__link">
+    Nono Ciclo
+  </a>
+  
+    <nav class="md-nav" aria-label="Nono Ciclo">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#teste-red-state_8" class="md-nav__link">
+    Teste - Red State
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implementacao-do-codigo_7" class="md-nav__link">
+    Implementação do Código
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#teste-green-state_7" class="md-nav__link">
+    Teste - Green State
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#refatoracao_7" class="md-nav__link">
+    Refatoração
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#codigo-fonte" class="md-nav__link">
+    Código Fonte
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resultado-final-da-execucao-dos-testes" class="md-nav__link">
+    Resultado Final da Execução dos Testes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusao" class="md-nav__link">
+    Conclusão
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+<p><img src="https://fga.unb.br/marcus.chaffim/imagens/unb-fga-extenso.jpg"></p>
+<hr>
+
+<table class="cabecalho">
+<tr><td colspan=2><b>FGA 0238 Testes de Software - Turma 02 </b></td><td> <b>Semestre</b>  </td><td> 2023.1 </td></tr>
+<tr><td><b>Nome</b> </td><td> Nicolas Chagas Souza                </td><td> <b>Matrícula</b> </td><td> 20/0042327 </td></tr>
+<tr><td><b>Equipe</b></td><td> PassaNada</td></tr>
+</table>
+
+<hr>
+<p style="text-align: center"><b> Atividade 4 – TDD </b></p>
+<hr>
+
+<h1 id="atividade-4-tdd">Atividade 4 - TDD</h1>
+<h2 id="funcionalidade">Funcionalidade</h2>
+<h3 id="identificacao-da-issue">Identificação da Issue</h3>
+<p>Devido a dificuldade de encontrar issues com funcionalidades compatíveis com o TDD, uma vez que a maioria das issues se refere à ajustes em componentes visuais e os testes em tais componentes são de complexa implementação devido à utilização de mocks no frontend, optou-se pela elaboração de uma nova funcionalidade não registrada em issue.</p>
+<h3 id="especificacao">Especificação</h3>
+<p>Deve ser possível importar dados da plataforma no formato JSON.</p>
+<p>Critérios de aceitação:</p>
+<ul>
+<li>Enumeradores (enums) devem ser convertidos para string na conversão.</li>
+<li>A conversão deve ser recursiva, transformando em JSON objetos aninhados.</li>
+<li>Um array de objetos deve ser convertido para um array com objetos JSON.</li>
+</ul>
+<h2 id="execucao">Execução</h2>
+<h3 id="primeiro-ciclo">Primeiro Ciclo</h3>
+<p>Durante o primeiro ciclo de desenvolvimento um objeto do tipo <code>Student</code>, cuja especificação está disponível na classe <code>api-output.ts</code>, será convertido para JSON.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">api-output.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">ApiOutput</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">requestId?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">Student</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">ApiOutput</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">email</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">courseId</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">sectionName</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">teamName</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">googleId?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">comments?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">key?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">institute?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">joinState?</span><span class="o">:</span><span class="w"> </span><span class="kt">JoinState</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Por motivos didáticos, a conversão para JSON será feita sem a utilização de bibliotecas e funções próprias, mas para facilitar a verificação serão utilizados os métodos do objeto JSON do typescript.</p>
+<h4 id="teste-red-state">Teste - Red State</h4>
+<p>Após a escrita do primeiro teste, a o arquivo de teste encontrava-se da seguinte maneira:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.spec.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>
+</code></pre></div></td></tr></table></div>
+<p>Para que o teste fosse executado, foi necessário criar uma implementação mínima, obedecendo as regras de compilação do projeto, que exige que as funções declaradas sejam utilizadas assim como os parâmetros da função.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">JsonHelper</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">object</span><span class="o">:</span><span class="w"> </span><span class="kt">Object</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">object</span><span class="w"> </span><span class="kr">as</span><span class="w"> </span><span class="kt">string</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>A primeira execução do teste aponta corretamente o red state, demonstrando que o método testado ainda não está implementado da maneira correta.</p>
+<p><center>
+<img alt="" src="../assets/relatorio_4/4323.png" /></p>
+<p><fig>Primeira execução do teste criado.</fig>
+</center></p>
+<h4 id="implementacao-do-codigo">Implementação do Código</h4>
+<p>Em seguida, o método <code>parseObjectToJSON</code> foi implementado da seguinte maneira:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">object</span><span class="o">:</span><span class="w"> </span><span class="kt">Object</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;{&quot;</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">entries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">object</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">entry</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">entries</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">entry</span>
+<span class="w">        </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`&quot;</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb">&quot;:&quot;</span><span class="si">${</span><span class="nx">value</span><span class="si">}</span><span class="sb">&quot;`</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">entries</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">entries</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span>
+<span class="w">            </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;,&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;}&quot;</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">jsonResponse</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="teste-green-state">Teste - Green State</h4>
+<p>E então foi atingido o green state, com o sucesso ao rodar os testes:</p>
+<p><center>
+<img alt="" src="../assets/relatorio_4/4409.png" />
+<fig>Confirmação do green state.</fig>
+</center></p>
+<h4 id="refatoracao">Refatoração</h4>
+<p>Não foi identificada necessidade de refatoração no método, apenas no código de teste, passando-o para a seguinte versão:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.spec.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w"> </span><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;Should parse student to JSON&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">input</span><span class="o">:</span><span class="w"> </span><span class="kt">Student</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">courseId</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;TESTES&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">email</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;email@test.com.zt&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">teamName</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;PassaNada&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">sectionName</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;T01&quot;</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">        </span><span class="nx">expect</span><span class="p">(</span><span class="nx">JsonHelper</span><span class="p">.</span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">input</span><span class="p">)).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">input</span><span class="p">))</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div></td></tr></table></div>
+<h3 id="segundo-ciclo">Segundo Ciclo</h3>
+<p>Durante o segundo ciclo, um objeto genérico foi escolhido para o tratamento de valores <code>null</code>, que os valores nulos devem aparecer como <code>null</code> no JSON.</p>
+<h4 id="teste-red-state_1">Teste - Red State</h4>
+<p>Foram elaborados dois testes para contemplar as duas situações.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.spec.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;Should parse null values as null&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">input</span><span class="o">:</span><span class="w"> </span><span class="kt">Object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">email</span><span class="o">:</span><span class="w"> </span><span class="kt">null</span><span class="p">,</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">expect</span><span class="p">(</span><span class="nx">JsonHelper</span><span class="p">.</span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">input</span><span class="p">)).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">input</span><span class="p">))</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div></td></tr></table></div>
+<p>Como esperado, a execução deste teste ocasiona o red state:</p>
+<p><center>
+<img alt="" src="../assets/relatorio_4/0750.png" />
+<fig>Testes no red state.</fig>
+</center></p>
+<h4 id="implementacao-do-codigo_1">Implementação do Código</h4>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">object</span><span class="o">:</span><span class="w"> </span><span class="kt">Object</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;{&quot;</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">entries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">object</span><span class="p">)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">entry</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">entries</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">entry</span>
+<span class="w">            </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`&quot;</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb">&quot;:`</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">value</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`null`</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`&quot;</span><span class="si">${</span><span class="nx">value</span><span class="si">}</span><span class="sb">&quot;`</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">entries</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">entries</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;,&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;}&quot;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">jsonResponse</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="teste-green-state_1">Teste - Green State</h4>
+<p><center>
+<img alt="" src="../assets/relatorio_4/1008.png" />
+<fig> Teste no green state.</fig>
+</center></p>
+<h4 id="refatoracao_1">Refatoração</h4>
+<p>Não foi identificada necessidade de refatoração nesse ciclo.</p>
+<h3 id="terceiro-ciclo">Terceiro Ciclo</h3>
+<p>Durante o terceiro ciclo, um objeto genérico foi escolhido para o tratamento de valores <code>undefined</code>, que não devem aparecer no JSON.</p>
+<h4 id="teste-red-state_2">Teste - Red State</h4>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.spec.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;Shouldn&#39;t contain undefined values&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">input</span><span class="o">:</span><span class="w"> </span><span class="kt">Object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">age</span><span class="o">:</span><span class="w"> </span><span class="kt">undefined</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">expect</span><span class="p">(</span><span class="nx">JsonHelper</span><span class="p">.</span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">input</span><span class="p">)).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">input</span><span class="p">))</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div></td></tr></table></div>
+<p><center>
+<img alt="" src="../assets/relatorio_4/1150.png" />
+<fig>Testes no red state.</fig>
+</center></p>
+<h4 id="implementacao-do-codigo_2">Implementação do Código</h4>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">object</span><span class="o">:</span><span class="w"> </span><span class="kt">Object</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;{&quot;</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">entries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">object</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="nx">entry</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">entry</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="p">)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">entry</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">entries</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">entry</span>
+<span class="w">            </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`&quot;</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb">&quot;:`</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">value</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`null`</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`&quot;</span><span class="si">${</span><span class="nx">value</span><span class="si">}</span><span class="sb">&quot;`</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">entries</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">entries</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;,&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;}&quot;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">jsonResponse</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="teste-green-state_2">Teste - Green State</h4>
+<p><center>
+<img alt="" src="../assets/relatorio_4/1616.png" />
+<fig> Teste no green state.</fig>
+</center></p>
+<h4 id="refatoracao_2">Refatoração</h4>
+<p>Uma pequena mudança foi realizada durante a refatoração.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">object</span><span class="o">:</span><span class="w"> </span><span class="kt">Object</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;{&quot;</span>
+
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">entries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">object</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="nx">entry</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">entry</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="p">)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">entry</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">entries</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">entry</span>
+<span class="w">            </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`&quot;</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb">&quot;:`</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">value</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">value</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`&quot;</span><span class="si">${</span><span class="nx">value</span><span class="si">}</span><span class="sb">&quot;`</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">entries</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">entries</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;,&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;}&quot;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">jsonResponse</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Validada pela execução correta dos testes.</p>
+<p><center>
+<img alt="" src="../assets/relatorio_4/1749.png" />
+<fig>Testes em green state.</fig>
+</center></p>
+<h3 id="quarto-ciclo">Quarto Ciclo</h3>
+<p>Durante o quarto ciclo será feito o tratamento de números, que não devem ser rodeados por aspas em JSON.</p>
+<h4 id="teste-red-state_3">Teste - Red State</h4>
+<p>Foram escritos três testes, para tratar números que são nativamente do tipo <code>number</code> e números em string.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.spec.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;Shouldn&#39;t quote numberic values&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">input</span><span class="o">:</span><span class="w"> </span><span class="kt">Object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">age</span><span class="o">:</span><span class="w"> </span><span class="kt">25</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">        </span><span class="nx">expect</span><span class="p">(</span><span class="nx">JsonHelper</span><span class="p">.</span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">input</span><span class="p">)).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">input</span><span class="p">))</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;Shouldn&#39;t quote float values&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">input</span><span class="o">:</span><span class="w"> </span><span class="kt">Object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">score</span><span class="o">:</span><span class="w"> </span><span class="kt">50.2</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">        </span><span class="nx">expect</span><span class="p">(</span><span class="nx">JsonHelper</span><span class="p">.</span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">input</span><span class="p">)).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">input</span><span class="p">))</span>
+<span class="w">    </span><span class="p">})</span>
+<span class="w">    </span><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;Should quote string numbers&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">input</span><span class="o">:</span><span class="w"> </span><span class="kt">Object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">age</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;25&quot;</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">        </span><span class="nx">expect</span><span class="p">(</span><span class="nx">JsonHelper</span><span class="p">.</span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">input</span><span class="p">)).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">input</span><span class="p">))</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div></td></tr></table></div>
+<p>A execução destes testes indicou que a última opção já está contemplada no código.</p>
+<p><center>
+<img alt="" src="../assets/relatorio_4/4500.png" />
+<fig>Testes no red state.</fig>
+</center></p>
+<h4 id="implementacao-do-codigo_3">Implementação do Código</h4>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">object</span><span class="o">:</span><span class="w"> </span><span class="kt">Object</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;{&quot;</span>
+
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">entries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">object</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="nx">entry</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">entry</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="p">)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">entry</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">entries</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">entry</span>
+<span class="w">            </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`&quot;</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb">&quot;:`</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">value</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">value</span>
+<span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;number&#39;</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`</span><span class="si">${</span><span class="nx">value</span><span class="si">}</span><span class="sb">`</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`&quot;</span><span class="si">${</span><span class="nx">value</span><span class="si">}</span><span class="sb">&quot;`</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">entries</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">entries</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;,&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;}&quot;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">jsonResponse</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="teste-green-state_3">Teste - Green State</h4>
+<p><center>
+<img alt="" src="../assets/relatorio_4/4741.png" />
+<fig> Teste no green state.</fig>
+</center></p>
+<h4 id="refatoracao_3">Refatoração</h4>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">object</span><span class="o">:</span><span class="w"> </span><span class="kt">Object</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;{&quot;</span>
+
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">entries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">object</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="nx">entry</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">entry</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="p">)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">entry</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">entries</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">entry</span>
+<span class="w">            </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`&quot;</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb">&quot;:`</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">value</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="ow">typeof</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;number&#39;</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">value</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`&quot;</span><span class="si">${</span><span class="nx">value</span><span class="si">}</span><span class="sb">&quot;`</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">entries</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">entries</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;,&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;}&quot;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">jsonResponse</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Validada pela execução correta dos testes.</p>
+<p><center>
+<img alt="" src="../assets/relatorio_4/4912.png" />
+<fig>Testes em green state.</fig>
+</center></p>
+<h3 id="quinto-ciclo">Quinto Ciclo</h3>
+<p>Durante o quinto ciclo os enums serão tratados, para isso foi escolhido um enum do próprio projeto, disponível na classe <code>api-output.ts</code>, o <code>JoinState</code>, que corresponde a um dos atributos de <code>Student</code>.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">api-output.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="nx">JoinState</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">JOINED</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;JOINED&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">NOT_JOINED</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;NOT_JOINED&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="teste-red-state_4">Teste - Red State</h4>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.spec.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w"> </span><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;Should parse enum as string&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">input</span><span class="o">:</span><span class="w"> </span><span class="kt">Student</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">courseId</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;TESTES&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">email</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;email@test.com.zt&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">teamName</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;PassaNada&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">sectionName</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;T01&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">joinState</span><span class="o">:</span><span class="w"> </span><span class="kt">JoinState.JOINED</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">        </span><span class="nx">expect</span><span class="p">(</span><span class="nx">JsonHelper</span><span class="p">.</span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">input</span><span class="p">)).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">input</span><span class="p">))</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div></td></tr></table></div>
+<p>A execução dos testes apontou que essa especificação já estava contemplada na implementação. Portanto, o ciclo foi encerrado nesse instante.</p>
+<p><center>
+<img alt="" src="../assets/relatorio_4/5706.png" />
+<fig>Indicação de Green State</fig>
+</center></p>
+<h3 id="sexto-ciclo">Sexto Ciclo</h3>
+<p>Durante o sexto ciclo, foi implementada o tratamento de valores do tipo <code>boolean</code>. Para isso foi utilizado um objeto do tipo <code>InstructorPermissionSet</code>.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">api-output.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">InstructorPermissionSet</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">canModifyCourse</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">canModifyInstructor</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">canModifySession</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">canModifyStudent</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">canViewStudentInSections</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">canViewSessionInSections</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">canSubmitSessionInSections</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">canModifySessionCommentsInSections</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="teste-red-state_5">Teste - Red State</h4>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.spec.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;Shouldn&#39;t quote boolean values&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">input</span><span class="o">:</span><span class="w"> </span><span class="kt">InstructorPermissionSet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">canModifyCourse</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">canModifyInstructor</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">canModifySession</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">canModifyStudent</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">canViewStudentInSections</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">canViewSessionInSections</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">canSubmitSessionInSections</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">canModifySessionCommentsInSections</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">        </span><span class="nx">expect</span><span class="p">(</span><span class="nx">JsonHelper</span><span class="p">.</span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">input</span><span class="p">)).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">input</span><span class="p">))</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div></td></tr></table></div>
+<p><center>
+<img alt="" src="../assets/relatorio_4/0259.png" /></p>
+<p><fig>Testes no red state.</fig>
+</center></p>
+<h4 id="implementacao-do-codigo_4">Implementação do Código</h4>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">object</span><span class="o">:</span><span class="w"> </span><span class="kt">Object</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;{&quot;</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">nonQuotable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;boolean&#39;</span><span class="p">]</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">entries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">object</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="nx">entry</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">entry</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="p">)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">entry</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">entries</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">entry</span>
+<span class="w">            </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`&quot;</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb">&quot;:`</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">value</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">nonQuotable</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">value</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`&quot;</span><span class="si">${</span><span class="nx">value</span><span class="si">}</span><span class="sb">&quot;`</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">entries</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">entries</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;,&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;}&quot;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">jsonResponse</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="teste-green-state_4">Teste - Green State</h4>
+<p><center>
+<img alt="" src="../assets/relatorio_4/0426.png" /></p>
+<p><fig> Teste no green state.</fig>
+</center></p>
+<h4 id="refatoracao_4">Refatoração</h4>
+<p>Não foi identificada necessidade de refatoração nesse ciclo.</p>
+<h3 id="setimo-ciclo">Sétimo Ciclo</h3>
+<p>Neste ciclo a conversão de objetos aninhados foi implementada. Para isso foi utilizado um objeto do tipo <code>FeedbackSessionLogEntry</code>, que contém um enum e um objeto aninhado.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">api-output.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">FeedbackSessionLogEntry</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">studentData</span><span class="o">:</span><span class="w"> </span><span class="kt">Student</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">feedbackSessionLogType</span><span class="o">:</span><span class="w"> </span><span class="kt">FeedbackSessionLogType</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">timestamp</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="nx">FeedbackSessionLogType</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">ACCESS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;access&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">SUBMISSION</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;submission&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">VIEW_RESULT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;view result&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="teste-red-state_6">Teste - Red State</h4>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.spec.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>
+</code></pre></div></td></tr></table></div>
+<p><center>
+<img alt="" src="../assets/relatorio_4/1009.png" /></p>
+<p><fig>Testes no red state.</fig>
+</center></p>
+<h4 id="implementacao-do-codigo_5">Implementação do Código</h4>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">object</span><span class="o">:</span><span class="w"> </span><span class="kt">Object</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;{&quot;</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">nonQuotable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;boolean&#39;</span><span class="p">]</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">entries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">object</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="nx">entry</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">entry</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="p">)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">entry</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">entries</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">entry</span>
+<span class="w">            </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`&quot;</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb">&quot;:`</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">value</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">nonQuotable</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">value</span>
+<span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`&quot;</span><span class="si">${</span><span class="nx">value</span><span class="si">}</span><span class="sb">&quot;`</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">entries</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">entries</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;,&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;}&quot;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">jsonResponse</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="teste-green-state_5">Teste - Green State</h4>
+<p><center>
+<img alt="" src="../assets/relatorio_4/1215.png" />
+<fig> Teste no green state.</fig>
+</center></p>
+<h4 id="refatoracao_5">Refatoração</h4>
+<p>Um novo teste foi adicionado, para identificar se há falhas na conversão de objetos com mais de um nível de aninhamento.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.spec.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;Should parse nested objects with more levels&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">input</span><span class="o">:</span><span class="w"> </span><span class="kt">Object</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;John Doe&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="nx">address</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">country</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">code</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;BR&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Brazil&quot;</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="nx">city</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">state</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;DF&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Brasília&quot;</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+
+<span class="w">        </span><span class="nx">expect</span><span class="p">(</span><span class="nx">JsonHelper</span><span class="p">.</span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">input</span><span class="p">)).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">input</span><span class="p">))</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div></td></tr></table></div>
+<p>E a execução deste teste apontou que essa especificação também foi contemplada.</p>
+<p><center>
+<img alt="" src="../assets/relatorio_4/1632.png" />
+<fig>Situação de Green State.</fig>
+</center></p>
+<h3 id="oitavo-ciclo">Oitavo Ciclo</h3>
+<p>Neste ciclo foi implementada a conversão de atributos do tipo. Para isso foi utilizado um objeto do tipo <code>Notifications</code>:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">api-output.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">Notification</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">ApiOutput</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">notificationId</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">startTimestamp</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">endTimestamp</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">createdAt</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">style</span><span class="o">:</span><span class="w"> </span><span class="kt">NotificationStyle</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">targetUser</span><span class="o">:</span><span class="w"> </span><span class="kt">NotificationTargetUser</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">  </span><span class="nx">shown</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kd">interface</span><span class="w"> </span><span class="nx">Notifications</span><span class="w"> </span><span class="k">extends</span><span class="w"> </span><span class="nx">ApiOutput</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">notifications</span><span class="o">:</span><span class="w"> </span><span class="kt">Notification</span><span class="p">[];</span>
+<span class="p">}</span>
+
+
+<span class="k">export</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="nx">NotificationStyle</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">PRIMARY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;PRIMARY&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">SECONDARY</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;SECONDARY&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">SUCCESS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;SUCCESS&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">DANGER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;DANGER&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">WARNING</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;WARNING&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">INFO</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;INFO&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">LIGHT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;LIGHT&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">DARK</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;DARK&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+
+<span class="k">export</span><span class="w"> </span><span class="kd">enum</span><span class="w"> </span><span class="nx">NotificationTargetUser</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="nx">STUDENT</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;STUDENT&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">INSTRUCTOR</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;INSTRUCTOR&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nx">GENERAL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;GENERAL&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="teste-red-state_7">Teste - Red State</h4>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.spec.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;Should parse array attribute&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">input</span><span class="o">:</span><span class="w"> </span><span class="kt">Notifications</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">notifications</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">notificationId</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;41841&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">startTimestamp</span><span class="o">:</span><span class="w"> </span><span class="kt">1688826966</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">endTimestamp</span><span class="o">:</span><span class="w"> </span><span class="kt">1688827486</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">createdAt</span><span class="o">:</span><span class="w"> </span><span class="kt">1688826999</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">style</span><span class="o">:</span><span class="w"> </span><span class="kt">NotificationStyle.WARNING</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">targetUser</span><span class="o">:</span><span class="w"> </span><span class="kt">NotificationTargetUser.STUDENT</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Activity wanting attention&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Don&#39;t forget to fill your feedback sessions.&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">shown</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">notificationId</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;1894&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">startTimestamp</span><span class="o">:</span><span class="w"> </span><span class="kt">1688812547</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">endTimestamp</span><span class="o">:</span><span class="w"> </span><span class="kt">1688812458</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">createdAt</span><span class="o">:</span><span class="w"> </span><span class="kt">1688812200</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">style</span><span class="o">:</span><span class="w"> </span><span class="kt">NotificationStyle.DANGER</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">targetUser</span><span class="o">:</span><span class="w"> </span><span class="kt">NotificationTargetUser.INSTRUCTOR</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Invalid Submission&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;The data submitted for course was invalid.&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">shown</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">,</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">]</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">expect</span><span class="p">(</span><span class="nx">JsonHelper</span><span class="p">.</span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">input</span><span class="p">)).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">input</span><span class="p">))</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div></td></tr></table></div>
+<p><center>
+<img alt="" src="./assets/relatorio_4/![](./assets/relatorio_4/1009.png).png" />
+<fig>Testes no red state.</fig>
+</center></p>
+<h4 id="implementacao-do-codigo_6">Implementação do Código</h4>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">object</span><span class="o">:</span><span class="w"> </span><span class="kt">Object</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;{&quot;</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">nonQuotable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;boolean&#39;</span><span class="p">]</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">entries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">object</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="nx">entry</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">entry</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="p">)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">entry</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">entries</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">entry</span>
+<span class="w">            </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`&quot;</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb">&quot;:`</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">value</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">nonQuotable</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">value</span>
+<span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nb">Array</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s1">&#39;[&#39;</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">value</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">value</span><span class="p">)).</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s1">&#39;]&#39;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`&quot;</span><span class="si">${</span><span class="nx">value</span><span class="si">}</span><span class="sb">&quot;`</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">entries</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">entries</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;,&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;}&quot;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">jsonResponse</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="teste-green-state_6">Teste - Green State</h4>
+<p><center>
+<img alt="" src="../assets/relatorio_4/4329.png" />
+<fig> Teste no green state.</fig>
+</center></p>
+<h4 id="refatoracao_6">Refatoração</h4>
+<p>Após a refatoração, o código ficou da seguinte maneira:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">object</span><span class="o">:</span><span class="w"> </span><span class="kt">Object</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;{&quot;</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">nonQuotable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;boolean&#39;</span><span class="p">]</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">entries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">object</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="nx">entry</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">entry</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="p">)</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">entry</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">entries</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">entry</span>
+<span class="w">            </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`&quot;</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb">&quot;:`</span><span class="p">;</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">value</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">nonQuotable</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">value</span>
+<span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nb">Array</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`[</span><span class="si">${</span><span class="nx">value</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">value</span><span class="p">)).</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span><span class="si">}</span><span class="sb">]`</span>
+<span class="w">            </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+<span class="w">            </span><span class="k">else</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`&quot;</span><span class="si">${</span><span class="nx">value</span><span class="si">}</span><span class="sb">&quot;`</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">entries</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">entries</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;,&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;}&quot;</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">jsonResponse</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Validada pela execução correta dos testes.</p>
+<p><center>
+<img alt="" src="../assets/relatorio_4/4516.png" />
+<fig>Testes em green state.</fig>
+</center></p>
+<h3 id="nono-ciclo">Nono Ciclo</h3>
+<p>Neste ciclo foi implementada a conversão de um array de objetos.</p>
+<h4 id="teste-red-state_8">Teste - Red State</h4>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.spec.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nx">it</span><span class="p">(</span><span class="s2">&quot;Should parse array attribute&quot;</span><span class="p">,</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span><span class="nx">imagin</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">input</span><span class="o">:</span><span class="w"> </span><span class="kt">Notifications</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">notifications</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">notificationId</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;41841&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">startTimestamp</span><span class="o">:</span><span class="w"> </span><span class="kt">1688826966</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">endTimestamp</span><span class="o">:</span><span class="w"> </span><span class="kt">1688827486</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">createdAt</span><span class="o">:</span><span class="w"> </span><span class="kt">1688826999</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">style</span><span class="o">:</span><span class="w"> </span><span class="kt">NotificationStyle.WARNING</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">targetUser</span><span class="o">:</span><span class="w"> </span><span class="kt">NotificationTargetUser.STUDENT</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Activity wanting attention&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Don&#39;t forget to fill your feedback sessions.&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">shown</span><span class="o">:</span><span class="w"> </span><span class="kt">true</span><span class="p">,</span>
+<span class="w">                </span><span class="p">},</span>
+<span class="w">                </span><span class="p">{</span>
+<span class="w">                    </span><span class="nx">notificationId</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;1894&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">startTimestamp</span><span class="o">:</span><span class="w"> </span><span class="kt">1688812547</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">endTimestamp</span><span class="o">:</span><span class="w"> </span><span class="kt">1688812458</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">createdAt</span><span class="o">:</span><span class="w"> </span><span class="kt">1688812200</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">style</span><span class="o">:</span><span class="w"> </span><span class="kt">NotificationStyle.DANGER</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">targetUser</span><span class="o">:</span><span class="w"> </span><span class="kt">NotificationTargetUser.INSTRUCTOR</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Invalid Submission&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;The data submitted for course was invalid.&quot;</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">shown</span><span class="o">:</span><span class="w"> </span><span class="kt">false</span><span class="p">,</span>
+<span class="w">                </span><span class="p">}</span>
+<span class="w">            </span><span class="p">]</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="nx">expect</span><span class="p">(</span><span class="nx">JsonHelper</span><span class="p">.</span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">input</span><span class="p">)).</span><span class="nx">toEqual</span><span class="p">(</span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">input</span><span class="p">))</span>
+<span class="w">    </span><span class="p">})</span>
+</code></pre></div></td></tr></table></div>
+<p><center>
+<img alt="" src="../assets/relatorio_4/4418.png" />
+<fig>Testes no red state.</fig>
+</center></p>
+<h4 id="implementacao-do-codigo_7">Implementação do Código</h4>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">JsonHelper</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">object</span><span class="o">:</span><span class="w"> </span><span class="kt">Object</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="nx">jsonResponse</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">object</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nb">Array</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="sb">`[</span><span class="si">${</span><span class="nx">object</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">obj</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">obj</span><span class="p">)).</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span><span class="si">}</span><span class="sb">]`</span>
+
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;{&quot;</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">nonQuotable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;boolean&#39;</span><span class="p">]</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">entries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">object</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="nx">entry</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">entry</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="p">)</span>
+<span class="w">            </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">entry</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">entries</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kd">const</span><span class="w"> </span><span class="p">[</span><span class="nx">key</span><span class="p">,</span><span class="w"> </span><span class="nx">value</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">entry</span>
+<span class="w">                </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`&quot;</span><span class="si">${</span><span class="nx">key</span><span class="si">}</span><span class="sb">&quot;:`</span><span class="p">;</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">value</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">nonQuotable</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">)</span>
+<span class="w">                    </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="nx">value</span>
+<span class="w">                </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nb">Array</span><span class="p">)</span>
+<span class="w">                    </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`[</span><span class="si">${</span><span class="nx">value</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">value</span><span class="p">)).</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span><span class="si">}</span><span class="sb">]`</span>
+<span class="w">                </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
+<span class="w">                    </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+<span class="w">                </span><span class="k">else</span>
+<span class="w">                    </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="sb">`&quot;</span><span class="si">${</span><span class="nx">value</span><span class="si">}</span><span class="sb">&quot;`</span>
+<span class="w">                </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">entries</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="nx">entry</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">entries</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mf">1</span><span class="p">)</span>
+<span class="w">                    </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;,&quot;</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">            </span><span class="nx">jsonResponse</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="s2">&quot;}&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">jsonResponse</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h4 id="teste-green-state_7">Teste - Green State</h4>
+<p><center>
+<img alt="" src="../assets/relatorio_4/%21%5B%5D%28./assets/relatorio_4/4329.png%29.png" />
+</center></p>
+<p><fig> Teste no green state.</fig>
+</center></p>
+<h4 id="refatoracao_7">Refatoração</h4>
+<p>Após a refatoração, o código ficou da seguinte maneira:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">json-helper.ts</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">export</span><span class="w"> </span><span class="kd">class</span><span class="w"> </span><span class="nx">JsonHelper</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">object</span><span class="o">:</span><span class="w"> </span><span class="kt">Object</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">object</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nb">Array</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="sb">`[</span><span class="si">${</span><span class="nx">object</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">obj</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">obj</span><span class="p">)).</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span><span class="si">}</span><span class="sb">]`</span>
+
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">entries</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">Object</span><span class="p">.</span><span class="nx">entries</span><span class="p">(</span><span class="nx">object</span><span class="p">).</span><span class="nx">filter</span><span class="p">(</span><span class="nx">entry</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">entry</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span><span class="w"> </span><span class="o">!==</span><span class="w"> </span><span class="kc">undefined</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">entry</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="sb">`&quot;</span><span class="si">${</span><span class="nx">entry</span><span class="p">[</span><span class="mf">0</span><span class="p">]</span><span class="si">}</span><span class="sb">&quot;:</span><span class="si">${</span><span class="k">this</span><span class="p">.</span><span class="nx">parseAttributeToJson</span><span class="p">(</span><span class="nx">entry</span><span class="p">[</span><span class="mf">1</span><span class="p">])</span><span class="si">}</span><span class="sb">`</span><span class="p">;</span>
+<span class="w">        </span><span class="p">})</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="sb">`{</span><span class="si">${</span><span class="nx">entries</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="s2">&quot;,&quot;</span><span class="p">)</span><span class="si">}</span><span class="sb">}`</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="nx">parseAttributeToJson</span><span class="p">(</span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="kt">Object</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="kd">const</span><span class="w"> </span><span class="nx">nonQuotable</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;boolean&#39;</span><span class="p">]</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="nx">value</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">nonQuotable</span><span class="p">.</span><span class="nx">indexOf</span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">value</span><span class="p">)</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="o">-</span><span class="mf">1</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="nx">value</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="ow">instanceof</span><span class="w"> </span><span class="nb">Array</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="sb">`[</span><span class="si">${</span><span class="nx">value</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">value</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">value</span><span class="p">)).</span><span class="nx">join</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span><span class="si">}</span><span class="sb">]`</span>
+<span class="w">        </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="ow">typeof</span><span class="w"> </span><span class="nx">value</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">&#39;object&#39;</span><span class="p">)</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="nx">parseObjectToJSON</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="sb">`&quot;</span><span class="si">${</span><span class="nx">value</span><span class="si">}</span><span class="sb">&quot;`</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<p>Validada pela execução correta dos testes.</p>
+<p><center>
+<img alt="" src="../assets/relatorio_4/5433.png" />
+<fig>Testes em green state.</fig>
+</center></p>
+<h2 id="codigo-fonte">Código Fonte</h2>
+<table>
+<thead>
+<tr>
+<th>Descrição</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Código de teste</td>
+<td><a href="https://github.com/nszchagas/teammates/blob/tdd/src/web/services/json-helper.spec.ts">json-helper.spec.ts</a></td>
+</tr>
+<tr>
+<td>Código da funcionalidade</td>
+<td><a href="https://github.com/nszchagas/teammates/blob/tdd/src/web/services/json-helper.ts">json-helper.ts</a></td>
+</tr>
+<tr>
+<td>Commits</td>
+<td><a href="https://github.com/nszchagas/teammates/commit/cda69ef105fcf779b4ab76c032d86533d8ac8999">Commit #cda69</a> e <a href="https://github.com/nszchagas/teammates/commit/a039ada056d479fafb7510960afaf8208bdaf2f9">Commit #a039a</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="resultado-final-da-execucao-dos-testes">Resultado Final da Execução dos Testes</h2>
+<p><center>
+<img alt="" src="../assets/relatorio_4/5649.png" />
+<fig>Resultado Final</fig>
+</center></p>
+<h2 id="conclusao">Conclusão</h2>
+<p>A realização de um método utilitário com a metodologia Test-Driven Development foi essencial para a fixação das etapas de desenvolvimento e documentação do requisito elaborado. A escolha da função teve maior influência pelo fator didático, uma vez que o próprio javascript faz essa conversão automaticamente com o método que foi utilizado para testar. Foram encontradas dificuldades em aplicar TDD em funcionalidades propostas em issues abertas, por envolverem mais conhecimento de código e do projeto em si. Além disso, durante o período do trabalho, não foi possível encontrar outros projetos com boas issues iniciais e propícias para o TDD, uma vez que muitas issues são referentes à problemas em interfaces, bugs visuais e problemas correlatos, que envolvem uma configuração maior dos testes, escapando do escopo do TDD. Como citado anteriormente, esse método, embora adequado para o aprendizado, não agrega valor ao produto <code>teammates</code>, por este motivo não foi realizado um <code>Pull Request</code>.</p>
+<p>Este documento explicita como os testes podem fornecer uma documentação detalhada acerca da funcionalidade, uma vez que pelos nomes dos testes realizados é possível extrair todos os critérios de aceitação do requisito especificado inicialmente, em um nível entre baixo e alto nível, isto é, esses requisitos estão em um nível de compreensão compatível com um analista de requisitos e um desenvolvedor.</p>
+
+
+
+  
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      2022 Nicolas Souza
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.code.copy", "toc.integrate"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.78eede0e.min.js"></script>
+      
+        <script src="../../js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

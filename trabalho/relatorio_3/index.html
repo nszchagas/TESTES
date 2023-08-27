@@ -1,0 +1,1359 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../relatorio_2/">
+      
+      
+        <link rel="next" href="../relatorio_4/">
+      
+      
+      <link rel="icon" href="../../assets/icon.png">
+      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.2.5">
+    
+    
+      
+        <title>Testes de Unidade - Testes de Software</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.0e669242.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.85d0ee34.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#identificacao-do-projeto" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Testes de Software" class="md-header__button md-logo" aria-label="Testes de Software" data-md-component="logo">
+      
+  <img src="../../assets/icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Testes de Software
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Testes de Unidade
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Dark mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Dark mode" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="pink" data-md-color-accent="indigo"  aria-label="Light mode"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Light mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/nszchagas/TESTES-notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TESTES-notes
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+                
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" hidden>
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Testes de Software" class="md-nav__button md-logo" aria-label="Testes de Software" data-md-component="logo">
+      
+  <img src="../../assets/icon.png" alt="logo">
+
+    </a>
+    Testes de Software
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/nszchagas/TESTES-notes" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.4.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2023 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TESTES-notes
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula1/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fundamentos de Testes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Psicologia e Economia em Testes de Software
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula3/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Técnicas de Teste Caixa-Preta
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Técnicas de Teste Caixa-Branca
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula5/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Test Driven Development (TDD)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../aula6/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    DevSecOps
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" checked>
+        
+          <label class="md-nav__link" for="__nav_7" id="__nav_7_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Trabalho
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            Trabalho
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../relatorio_2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Testes Funcionais/Sistema Caixa-Preta
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Testes de Unidade
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Testes de Unidade
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#identificacao-do-projeto" class="md-nav__link">
+    Identificação do Projeto
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cobertura-de-testes" class="md-nav__link">
+    Cobertura de Testes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#metodo-testado" class="md-nav__link">
+    Método testado
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#classe-de-testes" class="md-nav__link">
+    Classe de Testes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tabela-de-decisoescondicoes" class="md-nav__link">
+    Tabela de decisões/condições
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#especificacao-dos-casos-de-teste" class="md-nav__link">
+    Especificação dos Casos de Teste
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementacao-dos-casos-de-teste" class="md-nav__link">
+    Implementação dos Casos de Teste
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#analise-e-resultados" class="md-nav__link">
+    Análise e Resultados
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pull-request" class="md-nav__link">
+    Pull Request
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#links" class="md-nav__link">
+    Links
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../relatorio_4/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    TDD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+  <h1>Testes de Unidade</h1>
+
+<style>
+
+body {
+    counter-reset: condicoes;
+}
+
+c:after {
+    font-weight: bold;
+    color: red;
+    counter-increment: condicoes;
+    white-space: pre;
+    content: " (" counter(condicoes)")\a";
+}
+
+T:before {
+    color: green;
+    font-weight: bold;
+    content: "T"
+}
+
+F:before {
+    color: red;
+    font-weight: bold;
+    content: "F"
+}
+
+</style>
+
+<p><img src="https://fga.unb.br/marcus.chaffim/imagens/unb-fga-extenso.jpg"></p>
+<hr>
+
+<table class="cabecalho">
+<tr><td colspan=2><b>FGA 0238 Testes de Software - Turma 02 </b></td><td> <b>Semestre</b>  </td><td> 2023.1 </td></tr>
+<tr><td><b>Nome</b> </td><td> Nicolas Chagas Souza                </td><td> <b>Matrícula</b> </td><td> 20/0042327 </td></tr>
+<tr><td><b>Equipe</b></td><td> PassaNada</td></tr>
+</table>
+
+<hr>
+<p><center></p>
+<p><b> Atividade 3 – Desenvolver Testes de Unidade </b></p>
+<p></center></p>
+<hr>
+
+<h2 id="identificacao-do-projeto">Identificação do Projeto</h2>
+<p>A aplicação em teste é o TEAMMATES, que fornece funcionalidades para avaliação entre pares. Para utilizar o sistema, um instrutor deve solicitar uma conta na plataforma, em seguida, ele pode criar cursos, inscrever alunos nesses cursos, separados por grupos, e gerar sessões de avaliações por pares, onde cada integrante avalia a si mesmo e aos demais integrantes do grupo, por meio de questões definidas pelo instrutor.</p>
+<p>O fork utilizado está disponível no <a href="https://github.com/nszchagas/teammates">link</a>.</p>
+<h2 id="cobertura-de-testes">Cobertura de Testes</h2>
+<p>A execução dos testes de backend gerou o relatório representado nas figuras seguintes.</p>
+<p><center></p>
+<p><img alt="" src="../assets/relatorio_3/3937.png" />
+<fig>Relatório geral dos testes.</fig>
+</center></p>
+<p><center></p>
+<p><img alt="" src="../assets/relatorio_3/4012.png" />
+<fig>Relatório das classes do pacote util.</fig>
+</center></p>
+<p><center></p>
+<p><img alt="" src="../assets/relatorio_3/4056.png" />
+<fig>Relatório dos métodos da classe TimeHelper.</fig>
+</center></p>
+<p><center></p>
+<p><img alt="" src="../assets/relatorio_3/4139.png" />
+<fig>Cobertura do método testado antes da criação dos testes unitários.</fig>
+</center></p>
+<h2 id="metodo-testado">Método testado</h2>
+<p>O método escolhido para teste foi o <code>getMidnightAdjustedInstanteBaseOnZone</code> da classe <code>teammates.common.util.TimeHelper</code>.</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">teammates.common.util.TimeHelper.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="cm">/**</span>
+<span class="cm">     * Gets an Instant which is adjusted for midnight time (23:59 and 00:00) at the specified time zone.</span>
+<span class="cm">     * The direction of adjustment (23:59 to 00:00 or vice versa) is determined by {@code isForward} parameter.</span>
+<span class="cm">*/</span>
+<span class="kd">public</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">Instant</span><span class="w"> </span><span class="nf">getMidnightAdjustedInstantBasedOnZone</span><span class="p">(</span><span class="n">Instant</span><span class="w"> </span><span class="n">instant</span><span class="p">,</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">timeZone</span><span class="p">,</span><span class="w"> </span><span class="kt">boolean</span><span class="w"> </span><span class="n">isForward</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isSpecialTime</span><span class="p">(</span><span class="n">instant</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="n">instant</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="n">ZonedDateTime</span><span class="w"> </span><span class="n">zonedDateTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">instant</span><span class="p">.</span><span class="na">atZone</span><span class="p">(</span><span class="n">ZoneId</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">timeZone</span><span class="p">));</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">isForward</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">zonedDateTime</span><span class="p">.</span><span class="na">getHour</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">23</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">zonedDateTime</span><span class="p">.</span><span class="na">getMinute</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">59</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">zonedDateTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zonedDateTime</span><span class="p">.</span><span class="na">plusMinutes</span><span class="p">(</span><span class="mi">1L</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">isForward</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">zonedDateTime</span><span class="p">.</span><span class="na">getHour</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">zonedDateTime</span><span class="p">.</span><span class="na">getMinute</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">zonedDateTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">zonedDateTime</span><span class="p">.</span><span class="na">minusMinutes</span><span class="p">(</span><span class="mi">1L</span><span class="p">);</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">zonedDateTime</span><span class="p">.</span><span class="na">toInstant</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="classe-de-testes">Classe de Testes</h2>
+<p>Antes da incrementação dos testes existentes, o método de teste da classe estava no seguinte estado:</p>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">teammates.common.util.TimeHelperTest.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testGetMidnightAdjustedInstantBasedOnZone</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">zoneId</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;UTC&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">instantAt0000</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span><span class="w"> </span><span class="n">Month</span><span class="p">.</span><span class="na">NOVEMBER</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">).</span><span class="na">atZone</span><span class="p">(</span><span class="n">ZoneId</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">zoneId</span><span class="p">)).</span><span class="na">toInstant</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">backwardAdjusted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TimeHelper</span><span class="p">.</span><span class="na">getMidnightAdjustedInstantBasedOnZone</span><span class="p">(</span><span class="n">instantAt0000</span><span class="p">,</span><span class="w"> </span><span class="n">zoneId</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;Sun, 29 Nov 2015, 11:59 PM UTC&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="n">TimeHelper</span><span class="p">.</span><span class="na">formatInstant</span><span class="p">(</span><span class="n">backwardAdjusted</span><span class="p">,</span><span class="w"> </span><span class="n">zoneId</span><span class="p">,</span><span class="w"> </span><span class="n">DATETIME_DISPLAY_FORMAT</span><span class="p">));</span>
+
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">forwardAdjusted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TimeHelper</span><span class="p">.</span><span class="na">getMidnightAdjustedInstantBasedOnZone</span><span class="p">(</span><span class="n">instantAt0000</span><span class="p">,</span><span class="w"> </span><span class="n">zoneId</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;Mon, 30 Nov 2015, 12:00 AM UTC&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="n">TimeHelper</span><span class="p">.</span><span class="na">formatInstant</span><span class="p">(</span><span class="n">forwardAdjusted</span><span class="p">,</span><span class="w"> </span><span class="n">zoneId</span><span class="p">,</span><span class="w"> </span><span class="n">DATETIME_DISPLAY_FORMAT</span><span class="p">));</span>
+
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">instantAt2359</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2015</span><span class="p">,</span><span class="w"> </span><span class="n">Month</span><span class="p">.</span><span class="na">NOVEMBER</span><span class="p">,</span><span class="w"> </span><span class="mi">29</span><span class="p">,</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w"> </span><span class="mi">59</span><span class="p">).</span><span class="na">atZone</span><span class="p">(</span><span class="n">ZoneId</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">zoneId</span><span class="p">)).</span><span class="na">toInstant</span><span class="p">();</span>
+
+<span class="w">        </span><span class="n">backwardAdjusted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TimeHelper</span><span class="p">.</span><span class="na">getMidnightAdjustedInstantBasedOnZone</span><span class="p">(</span><span class="n">instantAt2359</span><span class="p">,</span><span class="w"> </span><span class="n">zoneId</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;Sun, 29 Nov 2015, 11:59 PM UTC&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="n">TimeHelper</span><span class="p">.</span><span class="na">formatInstant</span><span class="p">(</span><span class="n">backwardAdjusted</span><span class="p">,</span><span class="w"> </span><span class="n">zoneId</span><span class="p">,</span><span class="w"> </span><span class="n">DATETIME_DISPLAY_FORMAT</span><span class="p">));</span>
+
+<span class="w">        </span><span class="n">forwardAdjusted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TimeHelper</span><span class="p">.</span><span class="na">getMidnightAdjustedInstantBasedOnZone</span><span class="p">(</span><span class="n">instantAt2359</span><span class="p">,</span><span class="w"> </span><span class="n">zoneId</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;Mon, 30 Nov 2015, 12:00 AM UTC&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="n">TimeHelper</span><span class="p">.</span><span class="na">formatInstant</span><span class="p">(</span><span class="n">forwardAdjusted</span><span class="p">,</span><span class="w"> </span><span class="n">zoneId</span><span class="p">,</span><span class="w"> </span><span class="n">DATETIME_DISPLAY_FORMAT</span><span class="p">));</span>
+
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">wrongTimeZone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Asia/Singapore&quot;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="n">backwardAdjusted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TimeHelper</span><span class="p">.</span><span class="na">getMidnightAdjustedInstantBasedOnZone</span><span class="p">(</span><span class="n">instantAt0000</span><span class="p">,</span><span class="w"> </span><span class="n">wrongTimeZone</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;Mon, 30 Nov 2015, 12:00 AM UTC&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="n">TimeHelper</span><span class="p">.</span><span class="na">formatInstant</span><span class="p">(</span><span class="n">backwardAdjusted</span><span class="p">,</span><span class="w"> </span><span class="n">zoneId</span><span class="p">,</span><span class="w"> </span><span class="n">DATETIME_DISPLAY_FORMAT</span><span class="p">));</span>
+
+<span class="w">        </span><span class="n">forwardAdjusted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TimeHelper</span><span class="p">.</span><span class="na">getMidnightAdjustedInstantBasedOnZone</span><span class="p">(</span><span class="n">instantAt2359</span><span class="p">,</span><span class="w"> </span><span class="n">wrongTimeZone</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="s">&quot;Sun, 29 Nov 2015, 11:59 PM UTC&quot;</span><span class="p">,</span>
+<span class="w">                </span><span class="n">TimeHelper</span><span class="p">.</span><span class="na">formatInstant</span><span class="p">(</span><span class="n">forwardAdjusted</span><span class="p">,</span><span class="w"> </span><span class="n">zoneId</span><span class="p">,</span><span class="w"> </span><span class="n">DATETIME_DISPLAY_FORMAT</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="tabela-de-decisoescondicoes">Tabela de decisões/condições</h2>
+<table>
+<thead>
+<tr>
+<th>Decisão</th>
+<th>Situação para <code>true</code></th>
+<th>Situação para <code>false</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td>O <code>instant</code> é um entre:<br/> <code>Const.TIME_REPRESENTS_FOLLOW_OPENING</code><br/><code>Const.TIME_REPRESENTS_FOLLOW_VISIBLE</code><br/><code>Const.TIME_REPRESENTS_LATER</code><br/><code>Const.TIME_REPRESENTS_NOW</code></td>
+<td>O <code>instant</code> não é uma dessas constantes.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>A formatação do tempo é para frente (<code>isForward == true</code>) e o horário é 23:59</td>
+<td>A formatação do tempo não é para frente (<code>isForward == false</code>) ou o horário é diferente de 23:59.</td>
+</tr>
+<tr>
+<td>9</td>
+<td>A formatação do tempo não é para frente (<code>isForward == false</code>) e o horário é 00:00</td>
+<td>A formatação do tempo é para frente (<code>isForward == true</code>) ou o horário é diferente de 00:00.</td>
+</tr>
+</tbody>
+</table>
+<p><tab> Identificação das decisões. </tab></p>
+<table>
+<thead>
+<tr>
+<th>Decisão</th>
+<th>Condição</th>
+<th>Situação para <code>true</code></th>
+<th>Situação para <code>false</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>3</td>
+<td><code>isSpecialTime(instant)</code></td>
+<td><code>instant</code> é um entre:<br/> <code>Const.TIME_REPRESENTS_FOLLOW_OPENING</code><br/><code>Const.TIME_REPRESENTS_FOLLOW_VISIBLE</code><br/><code>Const.TIME_REPRESENTS_LATER</code><br/><code>Const.TIME_REPRESENTS_NOW</code>  <c/></td>
+<td><code>instant</code> é diferente desses.  <c/></td>
+</tr>
+<tr>
+<td>7A</td>
+<td><code>isForward</code></td>
+<td><code>isForward==true</code>  <c/></td>
+<td><code>isForward==false</code>  <c/></td>
+</tr>
+<tr>
+<td>7B</td>
+<td><code>zonedDateTime.getHour() == 23</code></td>
+<td>O <code>instant</code> está entre <code>23:00</code> e <code>23:59</code>.  <c/></td>
+<td>O <code>instant</code> está fora do intervalo de <code>23:00</code> à <code>23:59</code>.  <c/ ></td>
+</tr>
+<tr>
+<td>7C</td>
+<td><code>zonedDateTime.getMinute() == 59</code></td>
+<td>O <code>instant</code> é do tipo <code>hh:59</code>, com hh entre 0 e 23.  <c/></td>
+<td>O <code>instant</code> é do tipo <code>hh:mm</code>, com <code>mm != 59</code>.  <c/ ></td>
+</tr>
+<tr>
+<td>9A</td>
+<td><code>!isForward</code></td>
+<td><code>isForward==false</code>  <c/></td>
+<td><code>isForward==true</code>  <c/ ></td>
+</tr>
+<tr>
+<td>9B</td>
+<td><code>zonedDateTime.getHour() == 0</code></td>
+<td>O <code>instant</code> está entre <code>00:00</code> e <code>00:59</code>.  <c/></td>
+<td>O <code>instant</code> está fora do intervalo de <code>00:00</code> à <code>00:59</code>.  <c/ ></td>
+</tr>
+<tr>
+<td>9C</td>
+<td><code>zonedDateTime.getMinute() == 0</code></td>
+<td>O <code>instant</code> é do tipo <code>hh:00</code>, com hh entre 0 e 23.  <c/></td>
+<td>O <code>instant</code> é do tipo <code>hh:mm</code>, com <code>mm != 00</code>. <c/ ></td>
+</tr>
+</tbody>
+</table>
+<p><tab>Identificação das condições.</tab></p>
+<h2 id="especificacao-dos-casos-de-teste">Especificação dos Casos de Teste</h2>
+<p>A técnica das combinações múltiplas foi utilizadas para a determinação dos casos de teste, representados na tabela a seguir. Observe que 7A e 9A são opostas, então não é possível 7A == 9A. As condições 7B e 9B são incompatíveis, então não é possível ter 7B == 9B. As condições 7C e 9C são incompatíveis, então não é possível ter 7C == 9B. Como todas as constantes especiais de tempo possuem horário <code>00:00</code>, a condição 3 ser verdadeira implica em 9B e 9C verdadeiros e 7B e 7C falsos. Levando em consideração esses fatores, as combinações possíveis entre as decisões 7A, 7B e 7C e as decisões 9A, 9B e 9C foram representadas na tabela a seguir.</p>
+<table>
+<thead>
+<tr>
+<th>Número da combinação</th>
+<th>3</th>
+<th>7A</th>
+<th>7B</th>
+<th>7C</th>
+<th>9A</th>
+<th>9B</th>
+<th>9C</th>
+<th>Caso de Teste</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>#1</td>
+<td>X</td>
+<td><F/></td>
+<td><F/></td>
+<td><F/></td>
+<td><T/></td>
+<td><T/></td>
+<td><T/></td>
+<td>3</td>
+</tr>
+<tr>
+<td>#2</td>
+<td><F/></td>
+<td><F/></td>
+<td><F/></td>
+<td><T/></td>
+<td><T/></td>
+<td><T/></td>
+<td><F/></td>
+<td>4</td>
+</tr>
+<tr>
+<td>#3</td>
+<td><F/></td>
+<td><F/></td>
+<td><T/></td>
+<td><F/></td>
+<td><T/></td>
+<td><F/></td>
+<td><T/></td>
+<td>5</td>
+</tr>
+<tr>
+<td>#4</td>
+<td><F/></td>
+<td><F/></td>
+<td><T/></td>
+<td><T/></td>
+<td><T/></td>
+<td><F/></td>
+<td><F/></td>
+<td>2</td>
+</tr>
+<tr>
+<td>#5</td>
+<td>X</td>
+<td><T/></td>
+<td><F/></td>
+<td><F/></td>
+<td><F/></td>
+<td><T/></td>
+<td><T/></td>
+<td>1</td>
+</tr>
+<tr>
+<td>#6</td>
+<td><F/></td>
+<td><T/></td>
+<td><F/></td>
+<td><T/></td>
+<td><F/></td>
+<td><T/></td>
+<td><F/></td>
+<td>6</td>
+</tr>
+<tr>
+<td>#7</td>
+<td><F/></td>
+<td><T/></td>
+<td><T/></td>
+<td><F/></td>
+<td><F/></td>
+<td><F/></td>
+<td><T/></td>
+<td>7</td>
+</tr>
+<tr>
+<td>#8</td>
+<td><F/></td>
+<td><T/></td>
+<td><T/></td>
+<td><T/></td>
+<td><F/></td>
+<td><F/></td>
+<td><F/></td>
+<td>8</td>
+</tr>
+</tbody>
+</table>
+<p><tab> Combinações entre as condições. </tab></p>
+<blockquote>
+<p>X denota o 'don't care'.</p>
+</blockquote>
+<table>
+
+<tr>
+<td rowspan="2" class="header"> Número </td>
+<td rowspan="2" class="header"> Condições  </td>
+<td colspan="3" class="header"> Condição de Entrada </td>
+<td  class="header"> Combinações  </td>
+<td rowspan="2" class="header"> Saída Esperada  </td>
+</tr>
+
+<tr>
+
+<td><code>instant</code></td>
+<td><code>timeZone</code></td>
+<td><code>isForward</code></td>
+<td class="header"> | 3 | 7A | 7B | 7C | 9A | 9B | 9C | </td>
+</tr>
+
+<tr>
+<td>1</td>
+<td>1, 3, 6, 8, 10, 11, 13 </td>
+<td><code>TIME_REPRESENTS_FOLLOW_OPENING¹</code></td>
+<td>GMT-3</td>
+<td>true</td>
+<td> | <T/>  | <T/>  | <F/>  | <F/>  | <F/>  | <T/>  | <T/>  | </td>
+<td>TIME_REPRESENTES_FOLLOW_OPENING</td>
+</tr>
+
+<tr>
+<td>2</td>
+<td>2, 4, 5, 7, 9, 12, 14</td>
+<td>2023-05-31 23:59:00</td>
+<td>GMT-3</td>
+<td>false</td>
+<td> | <F/> | <F/> | <T/> | <T/> | <T/> | <F/> | <F/> |</td>
+<td>2023-05-31 23:59:00</td>
+</tr>
+
+<tr>
+<td>3</td>
+<td>-</td>
+<td>2023-05-31 00:00:00</td>
+<td>GMT-3</td>
+<td>false</td>
+<td>| <F/> | <F/> | <F/> | <F/> | <T/> | <T/> | <T/> |</td>
+<td>2023-05-30 23:59:00</td>
+</tr>
+
+<tr>
+<td>4</td>
+<td>-</td>
+<td>2023-05-31 00:59:00</td>
+<td>GMT-3</td>
+<td>false</td>
+<td>| <F/> | <F/> | <F/> | <T/> | <T/> | <T/> | <F/> |</td>
+
+<td>2023-05-31 00:59:00</td>
+</tr>
+
+<tr>
+<td>5</td>
+<td>-</td>
+<td>2023-05-31 23:00:00</td>
+<td>GMT-3</td>
+<td>false</td>
+
+<td>| <F/> | <F/> | <T/> | <F/> | <T/> | <F/> | <T/> |</td>
+
+<td>2023-05-31 23:00:00</td>
+</tr>
+
+<tr>
+<td>6</td>
+<td>-</td>
+<td>2023-05-31 00:59:00</td>
+<td>GMT-3</td>
+<td>true</td>
+
+<td>| <F/> | <T/> | <F/> | <T/> | <F/> | <T/> | <F/> |</td>
+
+<td>2023-05-31 00:59:00</td>
+</tr>
+
+<tr>
+<td>7</td>
+<td>-</td>
+<td>2023-05-31 23:00:00</td>
+<td>GMT-3</td>
+<td>true</td>
+
+<td>| <F/> | <T/> | <T/> | <F/> | <F/> | <F/> | <T/>| </td>
+
+<td>2023-05-31 23:00:00</td>
+</tr>
+
+<tr>
+<td>8</td>
+<td>-</td>
+<td>2023-05-31 23:59:00</td>
+<td>GMT-3</td>
+<td>true</td>
+
+<td>| <F/> |  <T/> |  <T/> |  <T/> |  <F/> |  <F/> |  <F/> |</td>
+
+<td>2023-06-01 00:00:00</td>
+</tr>
+
+</table>
+
+<blockquote>
+<p>¹<code>Const.TIME_REPRESENTS_FOLLOW_OPENING = TimeHelper.parseInstant("1970-12-31 00:00:00Z")</code> como o horário dessa constante é 0:00, ela já satisfaz as condições 11 e 13.</p>
+</blockquote>
+<h2 id="implementacao-dos-casos-de-teste">Implementação dos Casos de Teste</h2>
+<div class="highlight"><table class="highlighttable"><tr><th colspan="2" class="filename"><span class="filename">TimeHelperTest.java</span></th></tr><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 1</span>
+<span class="normal"> 2</span>
+<span class="normal"> 3</span>
+<span class="normal"> 4</span>
+<span class="normal"> 5</span>
+<span class="normal"> 6</span>
+<span class="normal"> 7</span>
+<span class="normal"> 8</span>
+<span class="normal"> 9</span>
+<span class="normal">10</span>
+<span class="normal">11</span>
+<span class="normal">12</span>
+<span class="normal">13</span>
+<span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="w">    </span><span class="c1">// Test Case #1</span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testGetMidnightAdjustedInstantBasedOnZoneWithProjectsTimeConstantShouldReturnSameConstant</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">timeZone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;GMT-3&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">constantInput</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Const</span><span class="p">.</span><span class="na">TIME_REPRESENTS_FOLLOW_OPENING</span><span class="p">;</span>
+<span class="w">        </span><span class="n">assertNotNull</span><span class="p">(</span><span class="n">constantInput</span><span class="p">);</span>
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">adjustedTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TimeHelper</span><span class="p">.</span><span class="na">getMidnightAdjustedInstantBasedOnZone</span><span class="p">(</span><span class="n">constantInput</span><span class="p">,</span><span class="w"> </span><span class="n">timeZone</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">constantInput</span><span class="p">,</span><span class="w"> </span><span class="n">adjustedTime</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Test Case #2</span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testGetMidnightAdjustedInstantBasedOnZoneWithTime2359notForwardFalseShouldReturnSameInstant</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">timeZone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;GMT-3&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">instantAt2359</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span><span class="w"> </span><span class="n">Month</span><span class="p">.</span><span class="na">MAY</span><span class="p">,</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w"> </span><span class="mi">59</span><span class="p">).</span><span class="na">atZone</span><span class="p">(</span><span class="n">ZoneId</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">timeZone</span><span class="p">)).</span><span class="na">toInstant</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">adjustedTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TimeHelper</span><span class="p">.</span><span class="na">getMidnightAdjustedInstantBasedOnZone</span><span class="p">(</span><span class="n">instantAt2359</span><span class="p">,</span><span class="w"> </span><span class="n">timeZone</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">instantAt2359</span><span class="p">,</span><span class="w"> </span><span class="n">adjustedTime</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Test Case #3</span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testGetMidnightAdjustedInstantBasedOnZoneWithTime0000notForwardShouldReturnPreviousDayAt2359</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">timeZone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;GMT-3&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">instantAt0000</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span><span class="w"> </span><span class="n">Month</span><span class="p">.</span><span class="na">MAY</span><span class="p">,</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">).</span><span class="na">atZone</span><span class="p">(</span><span class="n">ZoneId</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">timeZone</span><span class="p">)).</span><span class="na">toInstant</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">previousDayAt2359</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span><span class="w"> </span><span class="n">Month</span><span class="p">.</span><span class="na">MAY</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w"> </span><span class="mi">59</span><span class="p">).</span><span class="na">atZone</span><span class="p">(</span><span class="n">ZoneId</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">timeZone</span><span class="p">))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">toInstant</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">adjustedTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TimeHelper</span><span class="p">.</span><span class="na">getMidnightAdjustedInstantBasedOnZone</span><span class="p">(</span><span class="n">instantAt0000</span><span class="p">,</span><span class="w"> </span><span class="n">timeZone</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">previousDayAt2359</span><span class="p">,</span><span class="w"> </span><span class="n">adjustedTime</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Test Case #4</span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testGetMidnightAdjustedInstantBasedOnZoneWithTime0059notForwardShouldReturnSameInstant</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">timeZone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;GMT-3&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">instantAt0059</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span><span class="w"> </span><span class="n">Month</span><span class="p">.</span><span class="na">MAY</span><span class="p">,</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">59</span><span class="p">).</span><span class="na">atZone</span><span class="p">(</span><span class="n">ZoneId</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">timeZone</span><span class="p">)).</span><span class="na">toInstant</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">adjustedTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TimeHelper</span><span class="p">.</span><span class="na">getMidnightAdjustedInstantBasedOnZone</span><span class="p">(</span><span class="n">instantAt0059</span><span class="p">,</span><span class="w"> </span><span class="n">timeZone</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">instantAt0059</span><span class="p">,</span><span class="w"> </span><span class="n">adjustedTime</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Test Case #5</span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testGetMidnightAdjustedInstantBasedOnZoneWithTime2300notForwardShouldReturnSameInstant</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">timeZone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;GMT-3&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">instantAt2300</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span><span class="w"> </span><span class="n">Month</span><span class="p">.</span><span class="na">MAY</span><span class="p">,</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">).</span><span class="na">atZone</span><span class="p">(</span><span class="n">ZoneId</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">timeZone</span><span class="p">)).</span><span class="na">toInstant</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">adjustedTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TimeHelper</span><span class="p">.</span><span class="na">getMidnightAdjustedInstantBasedOnZone</span><span class="p">(</span><span class="n">instantAt2300</span><span class="p">,</span><span class="w"> </span><span class="n">timeZone</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">);</span>
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">instantAt2300</span><span class="p">,</span><span class="w"> </span><span class="n">adjustedTime</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Test Case #6</span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testGetMidnightAdjustedInstantBasedOnZoneWithTime0059andForwardShouldReturnSameInstant</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">timeZone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;GMT-3&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">instantAt0059</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span><span class="w"> </span><span class="n">Month</span><span class="p">.</span><span class="na">MAY</span><span class="p">,</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">59</span><span class="p">).</span><span class="na">atZone</span><span class="p">(</span><span class="n">ZoneId</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">timeZone</span><span class="p">)).</span><span class="na">toInstant</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">adjustedTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TimeHelper</span><span class="p">.</span><span class="na">getMidnightAdjustedInstantBasedOnZone</span><span class="p">(</span><span class="n">instantAt0059</span><span class="p">,</span><span class="w"> </span><span class="n">timeZone</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">instantAt0059</span><span class="p">,</span><span class="w"> </span><span class="n">adjustedTime</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Test Case #7</span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testGetMidnightAdjustedInstantBasedOnZoneWithTime2300andForwardShouldReturnSameInstant</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">timeZone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;GMT-3&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">instantAt2300</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span><span class="w"> </span><span class="n">Month</span><span class="p">.</span><span class="na">MAY</span><span class="p">,</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">).</span><span class="na">atZone</span><span class="p">(</span><span class="n">ZoneId</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">timeZone</span><span class="p">)).</span><span class="na">toInstant</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">adjustedTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TimeHelper</span><span class="p">.</span><span class="na">getMidnightAdjustedInstantBasedOnZone</span><span class="p">(</span><span class="n">instantAt2300</span><span class="p">,</span><span class="w"> </span><span class="n">timeZone</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">instantAt2300</span><span class="p">,</span><span class="w"> </span><span class="n">adjustedTime</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// Test Case #8</span>
+<span class="w">    </span><span class="nd">@Test</span>
+<span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">testGetMidnightAdjustedInstantBasedOnZoneWithTime2359andForwardShouldReturnNextDayAt0000</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">timeZone</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;GMT-3&quot;</span><span class="p">;</span>
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">instantAt2359</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span><span class="w"> </span><span class="n">Month</span><span class="p">.</span><span class="na">MAY</span><span class="p">,</span><span class="w"> </span><span class="mi">31</span><span class="p">,</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span><span class="w"> </span><span class="mi">59</span><span class="p">).</span><span class="na">atZone</span><span class="p">(</span><span class="n">ZoneId</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">timeZone</span><span class="p">)).</span><span class="na">toInstant</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">nextDayAt0000</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LocalDateTime</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span><span class="w"> </span><span class="n">Month</span><span class="p">.</span><span class="na">JUNE</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">).</span><span class="na">atZone</span><span class="p">(</span><span class="n">ZoneId</span><span class="p">.</span><span class="na">of</span><span class="p">(</span><span class="n">timeZone</span><span class="p">)).</span><span class="na">toInstant</span><span class="p">();</span>
+<span class="w">        </span><span class="n">Instant</span><span class="w"> </span><span class="n">adjustedTime</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TimeHelper</span><span class="p">.</span><span class="na">getMidnightAdjustedInstantBasedOnZone</span><span class="p">(</span><span class="n">instantAt2359</span><span class="p">,</span><span class="w"> </span><span class="n">timeZone</span><span class="p">,</span><span class="w"> </span><span class="kc">true</span><span class="p">);</span>
+<span class="w">        </span><span class="n">assertEquals</span><span class="p">(</span><span class="n">nextDayAt0000</span><span class="p">,</span><span class="w"> </span><span class="n">adjustedTime</span><span class="p">);</span>
+
+<span class="w">    </span><span class="p">}</span>
+</code></pre></div></td></tr></table></div>
+<h2 id="analise-e-resultados">Análise e Resultados</h2>
+<p>Após a execução dos testes da classe TimeHelperTest.java o seguinte resultado foi obtido na console.</p>
+<div class="highlight"><pre><span></span><code>&gt; Task :compileJava UP-TO-DATE
+&gt; Task :processResources UP-TO-DATE
+&gt; Task :classes UP-TO-DATE
+&gt; Task :compileTestJava UP-TO-DATE
+&gt; Task :processTestResources UP-TO-DATE
+&gt; Task :testClasses UP-TO-DATE
+&gt; Task :componentTests
+Jun 19, 2023 7:53:04 PM teammates.common.util.Logger info
+INFO: teammates.logic.core.LogicStarter:initializeDependencies:43: Initialized dependencies between logic classes
+[=============================teammates.common.util.TimeHelperTest=============================]
+teammates.common.util.TimeHelperTest completed
+Jun 19, 2023 7:53:04 PM com.google.cloud.testing.BlockingProcessStreamReader writeLog
+INFO: [datastore] Adding handler(s) to newly registered Channel.
+component-tests &gt; component-tests &gt; teammates.common.util.TimeHelperTest &gt; testEndOfYearDates PASSED
+component-tests &gt; component-tests &gt; teammates.common.util.TimeHelperTest &gt; testFormatDateTimeForDisplay PASSED
+component-tests &gt; component-tests &gt; teammates.common.util.TimeHelperTest &gt; testGetInstantDaysOffsetBeforeNow PASSED
+component-tests &gt; component-tests &gt; teammates.common.util.TimeHelperTest &gt; testGetInstantDaysOffsetFromNow PASSED
+component-tests &gt; component-tests &gt; teammates.common.util.TimeHelperTest &gt; testGetInstantHoursOffsetFromNow PASSED
+component-tests &gt; component-tests &gt; teammates.common.util.TimeHelperTest &gt; testGetInstantNearestHourBefore PASSED
+component-tests &gt; component-tests &gt; teammates.common.util.TimeHelperTest &gt; testGetMidnightAdjustedInstantBasedOnZone PASSED
+component-tests &gt; component-tests &gt; teammates.common.util.TimeHelperTest &gt; 
+testGetMidnightAdjustedInstantBasedOnZoneWithProjectsTimeConstantShouldReturnSameConstant PASSED
+component-tests &gt; component-tests &gt; teammates.common.util.TimeHelperTest &gt; 
+testGetMidnightAdjustedInstantBasedOnZoneWithTime0000notForwardShouldReturnPreviousDayAt2359 PASSED
+component-tests &gt; component-tests &gt; teammates.common.util.TimeHelperTest &gt; 
+testGetMidnightAdjustedInstantBasedOnZoneWithTime0059andForwardShouldReturnSameInstant PASSED
+component-tests &gt; component-tests &gt; teammates.common.util.TimeHelperTest &gt; 
+testGetMidnightAdjustedInstantBasedOnZoneWithTime0059notForwardShouldReturnSameInstant PASSED
+component-tests &gt; component-tests &gt; teammates.common.util.TimeHelperTest &gt; 
+testGetMidnightAdjustedInstantBasedOnZoneWithTime2300andForwardShouldReturnSameInstant PASSED
+component-tests &gt; component-tests &gt; teammates.common.util.TimeHelperTest &gt; 
+testGetMidnightAdjustedInstantBasedOnZoneWithTime2300notForwardShouldReturnSameInstant PASSED
+component-tests &gt; component-tests &gt; teammates.common.util.TimeHelperTest &gt; 
+testGetMidnightAdjustedInstantBasedOnZoneWithTime2359andForwardShouldReturnNextDayAt0000 PASSED
+component-tests &gt; component-tests &gt; teammates.common.util.TimeHelperTest &gt; 
+testGetMidnightAdjustedInstantBasedOnZoneWithTime2359notForwardFalseShouldReturnSameInstant PASSED
+</code></pre></div>
+<p>Nenhuma falha foi identificada na funcionalidade por meio dos testes realizados, uma vez que todos passaram com sucesso. A criação dos testes aumentou a cobertura de testes do método, conforme ilustrado na figura a seguir.</p>
+<p><center></p>
+<p><img alt="" src="../assets/relatorio_3/1332.png" />
+<fig>Cobertura de testes depois da adição dos novos testes.</fig>
+</center></p>
+<p><center></p>
+<p><img alt="" src="../assets/relatorio_3/1821.png" />
+<fig>Cobertura de testes depois da adição dos novos testes.</fig>
+</center></p>
+<h2 id="pull-request">Pull Request</h2>
+<p><center></p>
+<p><img alt="" src="../assets/relatorio_3/2141.png" />
+<fig>Screenshot do Pull Request.</fig>
+</center></p>
+<h2 id="links">Links</h2>
+<table>
+<thead>
+<tr>
+<th>Descrição</th>
+<th>URL</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Fork do projeto</td>
+<td><a href="https://github.com/nszchagas/teammates">https://github.com/nszchagas/teammates</a></td>
+</tr>
+<tr>
+<td>Implementação no projeto</td>
+<td><a href="https://github.com/nszchagas/teammates/blob/master/src/test/java/teammates/common/util/TimeHelperTest.java">https://github.com/nszchagas/teammates/blob/master/src/test/java/teammates/common/util/TimeHelperTest.java</a></td>
+</tr>
+<tr>
+<td>Commit da implementação</td>
+<td><a href="https://github.com/nszchagas/teammates/commit/994a659202bcf2e25adad1450b5a0658eada7510">https://github.com/nszchagas/teammates/commit/994a659202bcf2e25adad1450b5a0658eada7510</a></td>
+</tr>
+<tr>
+<td>Pull Request</td>
+<td><a href="https://github.com/TEAMMATES/teammates/pull/12486">https://github.com/TEAMMATES/teammates/pull/12486</a></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+
+
+
+  
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      2022 Nicolas Souza
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "content.code.copy", "toc.integrate"], "search": "../../assets/javascripts/workers/search.dfff1995.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.78eede0e.min.js"></script>
+      
+        <script src="../../js/mathjax.js"></script>
+      
+        <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
