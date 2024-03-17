@@ -1,0 +1,3 @@
+[submodule "teammates"]
+	path = teammates
+	url = git@github.com:nszchagas/teammates
